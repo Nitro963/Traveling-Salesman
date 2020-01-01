@@ -1,8 +1,8 @@
 public class Employee extends Watcher{
     public Employee(String name, int cnt) {
-        super(name, new Constrain(), cnt);
+        super(name, null, cnt);
     }
     public Employee(String name) {
-        super(name, new Constrain(), 20);
+        super(name, null, 20);
     }
 }

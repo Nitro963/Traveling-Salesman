@@ -28,13 +28,11 @@ abstract public class Watcher {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Watcher watcher = (Watcher) o;
-        return cntMax == watcher.cntMax &&
-                name.equals(watcher.name) &&
-                constrain.equals(watcher.constrain);
+        return name.equals(watcher.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, constrain, cntMax);
+        return Objects.hash(name);
     }
 }

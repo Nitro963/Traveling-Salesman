@@ -19,19 +19,19 @@ public class Constrain {
         this.cntDay = cntDay;
     }
 
-    public boolean availableAtDay(int i){
+    public boolean isAvailableAtDay(int i) {
         return (mainDaysMask & (1 << i)) != 0;
     }
 
-    public boolean preferDay(int i){
+    public boolean isPreferDay(int i) {
         return (secondaryDaysMask & (1 << i)) != 0;
     }
 
-    public boolean availableAtTime(int i){
+    public boolean isAvailableAtTime(int i) {
         return (mainTimesMask & (1 << i)) != 0;
     }
 
-    public boolean preferTime(int i){
+    public boolean isPreferTime(int i) {
         return (secondaryTimesMask & (1 << i)) != 0;
     }
 
