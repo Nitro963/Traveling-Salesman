@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.PriorityQueue;
 
-public class ClassRoom implements Comparable<ClassRoom> {
+public class ClassRoom implements Comparable<ClassRoom>, Cloneable {
     private String name;
     private int floor;
     private int cap;
@@ -53,6 +53,21 @@ public class ClassRoom implements Comparable<ClassRoom> {
         if (floor == o.floor)
             return cap - o.cap;
         return floor - o.floor;
+    }
+
+    @Override
+    public String toString() {
+        return "ClassRoom{" +
+                "name='" + name + '\'' +
+                ", floor=" + floor +
+                ", cap=" + cap +
+                ", watcherNeed=" + watcherNeed +
+                "}\n";
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new ClassRoom(name, floor, cap, watcherNeed);
     }
 
     public static ArrayList<Pair<Exam, Integer>> generateExams(ArrayList<ClassRoom> classRooms, ArrayList<Subject> subjects) throws Exception {

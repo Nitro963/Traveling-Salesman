@@ -1,13 +1,13 @@
 import java.util.Objects;
 
-public class Subject implements Comparable<Subject>{
+public class Subject implements Comparable<Subject>, Cloneable {
     private String name;
-    private int StudentsCnt;
+    private int studentsCnt;
     private int day, time;
 
     public Subject(String name, int studentsCnt, int day, int time) {
         this.name = name;
-        StudentsCnt = studentsCnt;
+        this.studentsCnt = studentsCnt;
         this.day = day;
         this.time = time;
     }
@@ -17,7 +17,7 @@ public class Subject implements Comparable<Subject>{
     }
 
     public int getStudentsCnt() {
-        return StudentsCnt;
+        return studentsCnt;
     }
 
     public int getDay() {
@@ -30,6 +30,8 @@ public class Subject implements Comparable<Subject>{
 
     @Override
     public int compareTo(Subject o) {
+        if (o == null)
+            return 0;
         if(o.day == this.day)
             return this.time - o.time;
         else
@@ -41,7 +43,7 @@ public class Subject implements Comparable<Subject>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Subject subject = (Subject) o;
-        return StudentsCnt == subject.StudentsCnt &&
+        return studentsCnt == subject.studentsCnt &&
                 day == subject.day &&
                 time == subject.time &&
                 name.equals(subject.name);
@@ -49,6 +51,11 @@ public class Subject implements Comparable<Subject>{
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, StudentsCnt, day, time);
+        return Objects.hash(name, studentsCnt, day, time);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new Subject(name, studentsCnt, day, time);
     }
 }

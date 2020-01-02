@@ -8,9 +8,16 @@ public class Constrain {
     private int conDay;
     private int cntDay;
 
-    public Constrain() {}
+    public Constrain() {
+        mainDaysMask = (1 << 5) - 1;
+        mainTimesMask = (1 << 3) - 1;
+        secondaryTimesMask = mainTimesMask;
+        secondaryDaysMask = mainDaysMask;
+        conDay = 3;
+        cntDay = 3;
+    }
 
-    public Constrain(int mainDaysMask, int secondaryDaysMask, int mainTimesMask, int secondaryTimesMask, int conDay, int cntDay) {
+    private Constrain(int mainDaysMask, int secondaryDaysMask, int mainTimesMask, int secondaryTimesMask, int conDay, int cntDay) {
         this.mainDaysMask = mainDaysMask;
         this.secondaryDaysMask = secondaryDaysMask;
         this.mainTimesMask = mainTimesMask;
@@ -20,35 +27,53 @@ public class Constrain {
     }
 
     public boolean isAvailableAtDay(int i) {
-        return (mainDaysMask & (1 << i)) != 0;
+        return (mainDaysMask & (1 << (i - 1))) != 0;
     }
 
     public boolean isPreferDay(int i) {
-        return (secondaryDaysMask & (1 << i)) != 0;
+        return (secondaryDaysMask & (1 << (i - 1))) != 0;
     }
 
     public boolean isAvailableAtTime(int i) {
-        return (mainTimesMask & (1 << i)) != 0;
+        return (mainTimesMask & (1 << (i - 1))) != 0;
     }
 
     public boolean isPreferTime(int i) {
-        return (secondaryTimesMask & (1 << i)) != 0;
+        return (secondaryTimesMask & (1 << (i - 1))) != 0;
     }
 
     public void setAvailableAtDay(int i){
-        mainDaysMask |= (1 << i);
+        mainDaysMask |= (1 << (i - 1));
     }
 
     public void setPreferDay(int i){
-        secondaryDaysMask |= (1 << i);
+        secondaryDaysMask |= (1 << (i - 1));
     }
 
     public void setAvailableAtTime(int i){
-        mainTimesMask |= (1 << i);
+        mainTimesMask |= (1 << (i - 1));
     }
 
     public void setPreferTime(int i){
-        secondaryTimesMask |= (1 << i);
+        secondaryTimesMask |= (1 << (i - 1));
+    }
+
+    public void unSetAvailableAtDay(int i) {
+        mainDaysMask &= ~(1 << (i - 1));
+        secondaryDaysMask &= ~(1 << (i - 1));
+    }
+
+    public void unSetPreferDay(int i) {
+        secondaryDaysMask &= ~(1 << (i - 1));
+    }
+
+    public void unSetAvailableAtTime(int i) {
+        mainTimesMask &= ~(1 << (i - 1));
+        secondaryTimesMask &= ~(1 << (i - 1));
+    }
+
+    public void unSetPreferTime(int i) {
+        secondaryTimesMask &= ~(1 << (i - 1));
     }
 
     public int getConDay() {
