@@ -20,6 +20,12 @@ public class Subject implements Comparable<Subject>, Cloneable {
         return studentsCnt;
     }
 
+    public void reduceStd(int value) {
+        if (this.studentsCnt <= value)
+            this.studentsCnt = 0;
+        else
+            this.studentsCnt -= value;
+    }
     public int getDay() {
         return day;
     }
