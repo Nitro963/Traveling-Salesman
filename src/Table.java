@@ -1,83 +1,96 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
-public class Table implements Comparable<Table> {
-    private ArrayList<ExamDay> examDays;
-    private int g;
-    private int f;
-    private ArrayList<Pair<Watcher, String>> ConstrainBreak;
+public class Table implements Cloneable {
+    ArrayList<Exam> list;//Exams Table
+    HashSet<Watcher>[][] hashSet;//at Day i and time j is the watcher x Taken?
+    HashSet<ClassRoom>[][] classRoomHashSet;//at Day i and time j is the classroom x taken?
+    LinkedList<Subject> pendingSubjects;//pending subjects to add to the exam list
+    int g;//Traversing cost(Graph edge)
 
     public Table() {
-        examDays = new ArrayList<>();
-        g = f = 0;
+        list = new ArrayList<>();
+        hashSet = new HashSet[10][5];
+        classRoomHashSet = new HashSet[10][5];
+        for (int i = 0; i < 10; i++)
+            for (int j = 0; j < 5; j++) {
+                hashSet[i][j] = new HashSet<>();
+                classRoomHashSet[i][j] = new HashSet<>();
+            }
+        pendingSubjects = new LinkedList<>();
     }
 
-    public Table(ArrayList<ExamDay> examDays) {
-        this.examDays = examDays;
-        g = f = 0;
-    }
-
-    public Table(ArrayList<ExamDay> examDays, int cost) {
-        this.examDays = examDays;
-        this.g = cost;
-    }
-
-    public static ArrayList<Table> init(ArrayList<Watcher> watchers, ArrayList<ClassRoom> classRooms) {
-        ArrayList<ExamDay> examDays = new ArrayList<>();
+    ArrayList<Table> generateNext(ArrayList<ClassRoom> classRooms, ArrayList<Teacher> teachers, ArrayList<Employee> employees, ArrayList<MasterStudent> students) {
         ArrayList<Table> ret = new ArrayList<>();
-        for (ClassRoom room : classRooms) {
-            ExamDay examDay = new ExamDay(1);
-            examDay.addExam(new Exam(room));
-            examDays.add(examDay);
+        Subject s = pendingSubjects.peek();
+        if (s.getStudentsCnt() == 0) {
+            pendingSubjects.poll();
+            s = pendingSubjects.peek();
         }
+        for (ClassRoom r : classRooms) {
+            if (!classRoomHashSet[s.getDay()][s.getTime()].contains(r)) {
+                Table t = (Table) clone();
+                t.classRoomHashSet[s.getDay()][s.getTime()].add(r);
+                //create a new exam and check classroom constrains (same floor, size , etc)
+                Exam e = new Exam(r, s);
 
-        Queue<Teacher> teacherQueue = new LinkedList<>();
-        Queue<TeacherAssist> teacherAssistQueue = new LinkedList<>();
-        Queue<MasterStudent> masterStudentQueue = new LinkedList<>();
-        Queue<Employee> employeeQueue = new LinkedList<>();
-        for (Watcher w : watchers) {
-            if (w instanceof Teacher)
-                teacherQueue.add((Teacher) w);
-            else if (w instanceof TeacherAssist)
-                teacherAssistQueue.add((TeacherAssist) w);
-            else if (w instanceof MasterStudent)
-                masterStudentQueue.add((MasterStudent) w);
-            else
-                employeeQueue.add((Employee) w);
+                //start adding all possible watchers -> creating a new state
+
+            }
         }
-
-        return ret;
-    }
-
-    public ArrayList<Pair<Watcher, String>> getConstrainBreak() {
-        return ConstrainBreak;
+        return null;
     }
 
     public boolean isFinal() {
-        return false;
-    }
-
-    public ArrayList<Table> generateNextTables() {
-        ArrayList<Table> ret = new ArrayList<>();
-
-        return ret;
-    }
-
-    public ArrayList<ExamDay> getExamDays() {
-        return examDays;
-    }
-
-    public int getG() {
-        return g;
-    }
-
-    public int getF() {
-        return f;
+        return pendingSubjects.isEmpty();
     }
 
     @Override
-    public int compareTo(Table o) {
-        return g - o.g;
+    protected Object clone() {
+        Table t = new Table();
+        t.list = (ArrayList<Exam>) list.clone();
+        t.pendingSubjects = (LinkedList<Subject>) pendingSubjects.clone();
+        t.classRoomHashSet = Arrays.copyOf(t.classRoomHashSet, 10);
+        t.hashSet = Arrays.copyOf(t.hashSet, 10);
+        t.g = g;
+        return t;
+    }
+
+    //uniform search
+    public static void solve() {
+        PriorityQueue<PqPair<Table>> pq = new PriorityQueue<>();
+        Table table = new Table();
+        pq.add(new PqPair<>(0, table));
+
+        HashMap<Table, Integer> mp = new HashMap<>();
+        while (!pq.isEmpty()) {
+
+            PqPair<Table> p = pq.poll();
+            Integer cost = p.first;
+            Table t = p.second;
+
+            if (t.isFinal()) {
+                //TODO printing Table content and constrains break
+                return;
+            }
+
+            if (mp.containsKey(t))
+                if (cost > mp.get(t))
+                    continue;
+
+            ArrayList<Table> list = null;//TODO generating nextStates
+
+            for (Table child : list) {
+                if (mp.containsKey(child)) {
+                    int oldCost = mp.get(child);
+                    if (oldCost > cost + child.g) {
+                        mp.put(child, cost + child.g);
+                        pq.add(new PqPair<>(child.g, child));
+                    }
+                } else {
+                    mp.put(child, child.g + cost);
+                    pq.add(new PqPair<>(child.g + cost, child));
+                }
+            }
+        }
     }
 }

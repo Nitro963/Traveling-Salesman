@@ -1,19 +1,36 @@
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.PriorityQueue;
 
 public class ClassRoom implements Comparable<ClassRoom>, Cloneable {
     private String name;
     private int floor;
     private int cap;
-    private int watcherNeed;
+    private ArrayList<String> watchersTypes;
 
-    public ClassRoom(String name, int floor, int cap, int watcherNeed) {
+    public ClassRoom(String name, int floor, int cap) {
         this.name = name;
         this.floor = floor;
         this.cap = cap;
-        this.watcherNeed = watcherNeed;
-
+        watchersTypes = new ArrayList<>();
+        switch (cap) {
+            case 30: {
+                watchersTypes.add("Master");
+                watchersTypes.add("Master");
+                break;
+            }
+            case 50: {
+                watchersTypes.add("Head");
+                watchersTypes.add("Secretary");
+                watchersTypes.add("Master");
+                break;
+            }
+            case 70: {
+                watchersTypes.add("Head");
+                watchersTypes.add("secretary");
+                watchersTypes.add("Master");
+                break;
+            }
+        }
     }
 
     public String getName() {
@@ -29,7 +46,11 @@ public class ClassRoom implements Comparable<ClassRoom>, Cloneable {
     }
 
     public int getWatcherNeed() {
-        return watcherNeed;
+        return watchersTypes.size();
+    }
+
+    public ArrayList<String> getWatchersTypes() {
+        return watchersTypes;
     }
 
     @Override
@@ -38,14 +59,12 @@ public class ClassRoom implements Comparable<ClassRoom>, Cloneable {
         if (o == null || getClass() != o.getClass()) return false;
         ClassRoom classRoom = (ClassRoom) o;
         return floor == classRoom.floor &&
-                cap == classRoom.cap &&
-                watcherNeed == classRoom.watcherNeed &&
                 name.equals(classRoom.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, floor, cap, watcherNeed);
+        return Objects.hash(name, floor);
     }
 
     @Override
@@ -61,35 +80,11 @@ public class ClassRoom implements Comparable<ClassRoom>, Cloneable {
                 "name='" + name + '\'' +
                 ", floor=" + floor +
                 ", cap=" + cap +
-                ", watcherNeed=" + watcherNeed +
                 "}\n";
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return new ClassRoom(name, floor, cap, watcherNeed);
-    }
-
-    public static ArrayList<Pair<Exam, Integer>> generateExams(ArrayList<ClassRoom> classRooms, ArrayList<Subject> subjects) throws Exception {
-        ArrayList<Pair<Exam, Integer>> ret = new ArrayList<>();
-        PriorityQueue<ClassRoom> qu = new PriorityQueue<>();
-        for (Subject s : subjects) {
-            int cnt = s.getStudentsCnt();
-            int floor = qu.peek().floor;
-            int cost = 0;
-            ArrayList<Exam> arrayList = new ArrayList<>();
-            while (cnt != 0) {
-                if (qu.isEmpty())
-                    throw new Exception("Students overflow");
-                ClassRoom r = qu.poll();
-                if (r.floor != floor)
-                    cost += 1;
-                cnt -= Math.min(r.cap, cnt);
-                arrayList.add(new Exam(r, s));
-            }
-            for (Exam e : arrayList)
-                ret.add(new Pair<>(e, cost));
-        }
-        return null;
+    protected Object clone() {
+        return new ClassRoom(name, floor, cap);
     }
 }

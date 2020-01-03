@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-abstract public class Watcher {
+abstract public class Watcher implements Cloneable {
     protected String name;
     protected Constrain constrain;
     protected int cntMax;
@@ -34,5 +34,19 @@ abstract public class Watcher {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    protected Object clone() {
+        try {
+            Watcher w = (Watcher) super.clone();
+            w.name = this.name;
+            w.cntMax = cntMax;
+            w.constrain = (Constrain) this.constrain.clone();
+            return w;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

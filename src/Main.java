@@ -1,8 +1,5 @@
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 import java.util.Scanner;
 
 
@@ -42,40 +39,6 @@ public class Main {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner cin = new Scanner(new BufferedInputStream(new FileInputStream("input.txt")));
-
-        int n = cin.nextInt();
-        for (int i = 0; i < n; i++)
-            ClassRooms.add(new ClassRoom(cin.next(), cin.nextInt(), cin.nextInt(), cin.nextInt()));
-        System.out.println(ClassRooms);
-
-        int m = cin.nextInt();
-        for (int i = 0; i < m; i++) {
-            int t = cin.nextInt();
-            Watcher w = null;
-            switch (t) {
-                case 1: {
-                    w = new Teacher(cin.next(), buildConstrain(cin));
-                    break;
-                }
-                case 2: {
-                    w = new TeacherAssist(cin.next(), buildConstrain(cin));
-                    break;
-                }
-            }
-            Watchers.add(w);
-        }
-
-        UFS();
-
+        State.solve();
     }
-
-
-    public static Table UFS() {
-        PriorityQueue<Table> pq = new PriorityQueue<>();
-        pq.addAll(Table.init(Watchers, ClassRooms));
-
-        return null;
-    }
-
 }

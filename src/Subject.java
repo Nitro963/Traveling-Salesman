@@ -55,7 +55,7 @@ public class Subject implements Comparable<Subject>, Cloneable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    protected Object clone() {
         return new Subject(name, studentsCnt, day, time);
     }
 }

@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Constrain {
+public class Constrain implements Cloneable {
     private int mainDaysMask;
     private int secondaryDaysMask;
     private int mainTimesMask;
@@ -108,5 +108,17 @@ public class Constrain {
     @Override
     public int hashCode() {
         return Objects.hash(mainDaysMask, secondaryDaysMask, mainTimesMask, secondaryTimesMask, conDay, cntDay);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Constrain c = new Constrain();
+        c.mainTimesMask = mainTimesMask;
+        c.secondaryDaysMask = secondaryDaysMask;
+        c.cntDay = cntDay;
+        c.secondaryTimesMask = secondaryTimesMask;
+        c.mainTimesMask = mainTimesMask;
+        c.conDay = conDay;
+        return c;
     }
 }
