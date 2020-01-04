@@ -5,12 +5,22 @@ abstract public class Watcher implements Cloneable {
     protected Constrain constrain;
     protected int cntMax;
     protected String type;
+    protected int id;
 
-    public Watcher(String name, Constrain constrain, int cntMax) {
+    public Watcher(String name, int id, Constrain constrain, int cntMax) {
         this.name = name;
         this.constrain = constrain;
         this.cntMax = cntMax;
         this.type = null;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -46,6 +56,7 @@ abstract public class Watcher implements Cloneable {
             w.cntMax = cntMax;
             w.constrain = (Constrain) this.constrain.clone();
             w.type = type;
+            w.id = id;
             return w;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();

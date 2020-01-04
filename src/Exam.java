@@ -54,6 +54,14 @@ public class Exam implements Comparable<Exam>, Cloneable {
         return watchersTypes.size();
     }
 
+    public String getNextWatcher() {
+        if (watchersTypes.size() == watchers.size()) {
+            System.out.println("full");
+            return null;
+        }
+        return watchersTypes.get(watchers.size());
+    }
+
     public LinkedList<String> getWatchersTypes() {
         return watchersTypes;
     }
