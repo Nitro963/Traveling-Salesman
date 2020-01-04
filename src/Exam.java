@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 
 public class Exam implements Comparable<Exam>, Cloneable {
@@ -10,15 +11,36 @@ public class Exam implements Comparable<Exam>, Cloneable {
     private Employee secretary;
     private HashSet<Watcher> watchers;
     private ArrayList<String> constrainBreak;
+    private LinkedList<String> watchersTypes;
 
     private Exam() {
-
     }
 
     public Exam(ClassRoom classRoom) {
         this.classRoom = classRoom;
         watchers = new HashSet<>();
         constrainBreak = new ArrayList<>();
+        watchersTypes = new LinkedList<>();
+        switch (classRoom.getCap()) {
+            case 30: {
+                watchersTypes.add("Watcher");
+                watchersTypes.add("Watcher");
+                break;
+            }
+            case 50: {
+                watchersTypes.add("Teacher");
+                watchersTypes.add("Employee");
+                watchersTypes.add("Watcher");
+                break;
+            }
+            case 70: {
+                watchersTypes.add("Teacher");
+                watchersTypes.add("Employee");
+                watchersTypes.add("Watcher");
+                watchersTypes.add("Watcher");
+                break;
+            }
+        }
     }
 
     public Exam(ClassRoom classRoom, Subject subject) {
@@ -26,6 +48,14 @@ public class Exam implements Comparable<Exam>, Cloneable {
         this.subject = subject;
         watchers = new HashSet<>();
         constrainBreak = new ArrayList<>();
+    }
+
+    public int getWatcherNeed() {
+        return watchersTypes.size();
+    }
+
+    public LinkedList<String> getWatchersTypes() {
+        return watchersTypes;
     }
 
     public void addConstrainBreak(String s) {
@@ -72,28 +102,6 @@ public class Exam implements Comparable<Exam>, Cloneable {
         return subject;
     }
 
-    private boolean check(int s) {
-        if (head == null || secretary == null)
-            return false;
-        return watchers.size() == s;
-    }
-
-    public boolean isValid() {
-        int cap = classRoom.getCap();
-        if (cap == 50) {
-            if (!check(3))
-                return false;
-        }
-        if (cap == 30) {
-            if (watchers.size() != 3)
-                return false;
-        }
-        if (cap == 70) {
-            return check(4);
-        }
-        return true;
-    }
-
     @Override
     public int compareTo(Exam o) {
         return subject.compareTo(o.subject);
@@ -109,5 +117,24 @@ public class Exam implements Comparable<Exam>, Cloneable {
         exam.secretary = (Employee) secretary.clone();
         exam.watchers = (HashSet<Watcher>) watchers.clone();
         return exam;
+    }
+
+    public boolean isValid() {
+        if (watchersTypes.size() != watchers.size())
+            return false;
+        LinkedList<String> list = new LinkedList<>();
+        Collections.copy(list, watchersTypes);
+        for (Watcher w : watchers) {
+            if (list.contains(w.getType()))
+                list.removeFirstOccurrence(w.getType());
+            else if (w.getType().equals("Employee"))
+                if (list.contains("Watcher"))
+                    list.removeFirstOccurrence("Watcher");
+                else
+                    return false;
+            else
+                return false;
+        }
+        return true;
     }
 }

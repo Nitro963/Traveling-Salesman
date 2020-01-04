@@ -49,6 +49,10 @@ public class Subject implements Comparable<Subject>, Cloneable {
                 name.equals(subject.name);
     }
 
+    public void setStudentsCnt(int studentsCnt) {
+        this.studentsCnt = studentsCnt;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, studentsCnt, day, time);

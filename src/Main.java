@@ -8,7 +8,6 @@ public class Main {
     public static ArrayList<ClassRoom> ClassRooms = new ArrayList<>();
     public static ArrayList<Subject> subjects = new ArrayList<>();
 
-
     public static Constrain buildConstrain(Scanner cin) {
         Constrain constrain = new Constrain();
         int k = cin.nextInt();
@@ -39,6 +38,6 @@ public class Main {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        State.solve();
+        TSP_State.solve();
     }
 }

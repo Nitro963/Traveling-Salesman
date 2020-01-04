@@ -1,36 +1,14 @@
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class ClassRoom implements Comparable<ClassRoom>, Cloneable {
     private String name;
     private int floor;
     private int cap;
-    private ArrayList<String> watchersTypes;
 
     public ClassRoom(String name, int floor, int cap) {
         this.name = name;
         this.floor = floor;
         this.cap = cap;
-        watchersTypes = new ArrayList<>();
-        switch (cap) {
-            case 30: {
-                watchersTypes.add("Master");
-                watchersTypes.add("Master");
-                break;
-            }
-            case 50: {
-                watchersTypes.add("Head");
-                watchersTypes.add("Secretary");
-                watchersTypes.add("Master");
-                break;
-            }
-            case 70: {
-                watchersTypes.add("Head");
-                watchersTypes.add("secretary");
-                watchersTypes.add("Master");
-                break;
-            }
-        }
     }
 
     public String getName() {
@@ -43,14 +21,6 @@ public class ClassRoom implements Comparable<ClassRoom>, Cloneable {
 
     public int getCap() {
         return cap;
-    }
-
-    public int getWatcherNeed() {
-        return watchersTypes.size();
-    }
-
-    public ArrayList<String> getWatchersTypes() {
-        return watchersTypes;
     }
 
     @Override

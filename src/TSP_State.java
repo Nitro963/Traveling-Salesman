@@ -3,22 +3,22 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class State implements Cloneable {
+public class TSP_State implements Cloneable {
     ArrayList<Integer> list;
     int currentCity;
 
-    public State() {
+    public TSP_State() {
         currentCity = -1;
         list = new ArrayList<>();
     }
 
-    ArrayList<State> generateNext(ArrayList<Integer> nodes) {
+    ArrayList<TSP_State> generateNext(ArrayList<Integer> nodes) {
 
-        ArrayList<State> ret = new ArrayList<>();
+        ArrayList<TSP_State> ret = new ArrayList<>();
         for (Integer next : nodes) {
             if (next == currentCity)
                 continue;
-            State s = (State) clone();
+            TSP_State s = (TSP_State) clone();
             s.list.add(next);
             s.currentCity = next;
             ret.add(s);
@@ -39,9 +39,9 @@ public class State implements Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        State state = (State) o;
-        return currentCity == state.currentCity &&
-                list.equals(state.list);
+        TSP_State TSPState = (TSP_State) o;
+        return currentCity == TSPState.currentCity &&
+                list.equals(TSPState.list);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class State implements Cloneable {
 
     @Override
     protected Object clone() {
-        State s = new State();
+        TSP_State s = new TSP_State();
         s.list = (ArrayList<Integer>) list.clone();
         s.currentCity = currentCity;
         return s;
@@ -77,17 +77,17 @@ public class State implements Cloneable {
             adj[x][y] = z;
             adj[y][x] = z;
         }
-        PriorityQueue<PqPair<State>> pq = new PriorityQueue<>();
-        State start = new State();
+        PriorityQueue<PqPair<TSP_State>> pq = new PriorityQueue<>();
+        TSP_State start = new TSP_State();
         start.list.add(1);
         start.currentCity = 1;
         pq.add(new PqPair<>(0, start));
-        HashMap<State, Integer> mp = new HashMap<>();
+        HashMap<TSP_State, Integer> mp = new HashMap<>();
         while (!pq.isEmpty()) {
 
-            PqPair<State> p = pq.poll();
+            PqPair<TSP_State> p = pq.poll();
             Integer cost = p.first;
-            State s = p.second;
+            TSP_State s = p.second;
 
             if (s.isFinal(nodes)) {
                 System.out.println("fuck!! it's solved");
@@ -100,8 +100,8 @@ public class State implements Cloneable {
                 if (cost > mp.get(s))
                     continue;
 
-            ArrayList<State> list = s.generateNext(nodes);
-            for (State child : list) {
+            ArrayList<TSP_State> list = s.generateNext(nodes);
+            for (TSP_State child : list) {
                 int edge = adj[child.currentCity][s.currentCity];
                 if (edge == MAX)
                     continue;
