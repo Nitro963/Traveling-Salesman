@@ -8,7 +8,7 @@ public class Main {
     public static ArrayList<Employee> employees = new ArrayList<>();
     public static ArrayList<MasterStudent> students = new ArrayList<>();
 
-    public static ArrayList<ClassRoom> ClassRooms = new ArrayList<>();
+    public static ArrayList<ClassRoom> classRooms = new ArrayList<>();
     public static ArrayList<Subject> subjects = new ArrayList<>();
 
     public static void main(String[] args) throws FileNotFoundException {

@@ -165,7 +165,7 @@ public class Table implements Cloneable {
             if (this.checkConDay(student))
                 continue;
 
-            if (watchesCount[student.getId()] <= student.getCntMax()) {
+            if (watchesCount[student.getId()] + 1 <= student.getCntMax()) {
                 if (!hashSet[currentExam.getSubject().getDay()][currentExam.getSubject().getTime()].contains(student)) {
                     if (student.getConstrain().isAvailableAtDay(currentExam.getSubject().getDay())) {
                         if (student.getConstrain().isAvailableAtTime(currentExam.getSubject().getTime())) {
@@ -324,7 +324,7 @@ public class Table implements Cloneable {
                 if (cost > mp.get(t))
                     continue;
 
-            ArrayList<Table> list = t.generateNext(Main.ClassRooms);
+            ArrayList<Table> list = t.generateNext(Main.classRooms);
 
             for (Table child : list) {
                 if (mp.containsKey(child)) {
@@ -368,7 +368,7 @@ public class Table implements Cloneable {
                 if (fCost > mp.get(t))
                     continue;
 
-            ArrayList<Table> list = t.generateNext(Main.ClassRooms);
+            ArrayList<Table> list = t.generateNext(Main.classRooms);
 
             for (Table child : list) {
                 if (mp.containsKey(child)) {
