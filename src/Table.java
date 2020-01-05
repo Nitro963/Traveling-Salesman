@@ -31,6 +31,14 @@ public class Table implements Cloneable {
         pendingEmployees = new LinkedList<>();
     }
 
+    private int h1() {
+        return pendingSubjects.size();
+    }
+
+    private int h2() {
+        return 0;
+    }
+
     private void addW(Watcher w) {
         currentExam.addWatcher(w);
         watchesCount[w.getId()]++;
@@ -41,7 +49,7 @@ public class Table implements Cloneable {
         if (w.getConstrain().getConDay() == -1)
             return true;
         int cnt = 0;
-        for (int j = 0; j < 3; j++)
+        for (int j = 1; j <= 3; j++)
             if (hashSet[currentExam.getSubject().getDay()][j].contains(w))
                 cnt++;
             else
@@ -56,7 +64,6 @@ public class Table implements Cloneable {
             if (!classRoomHashSet[s.getDay()][s.getTime()].contains(r)) {
                 Table t = (Table) clone();
                 Subject subject = (Subject) s.clone();
-                subject.setStudentsCnt(Math.min(subject.getStudentsCnt() - r.getCap(), 0));
                 t.classRoomHashSet[s.getDay()][s.getTime()].add(r);
                 Exam e = new Exam(r, subject);
                 //TODO check classroom constrains (same floor, size , etc)
@@ -76,24 +83,26 @@ public class Table implements Cloneable {
             if (watchesCount[teacher.id] + 1 <= teacher.getCntMax())
                 if (!hashSet[currentExam.getSubject().getDay()][currentExam.getSubject().getTime()].contains(teacher))
                     if (teacher.getConstrain().isAvailableAtDay(currentExam.getSubject().getDay())) {
-                        teachers.remove(teacher);
-                        Table t = (Table) clone();
-                        if (teacher instanceof TeacherAssistant) {
-                            LinkedList<TeacherAssistant> linkedList = (LinkedList<TeacherAssistant>) teachers;
-                            linkedList.add((TeacherAssistant) teacher);
-                        } else {
-                            LinkedList<Teacher> linkedList = (LinkedList<Teacher>) teachers;
-                            linkedList.add(teacher);
+                        if (teacher.getConstrain().isAvailableAtTime(currentExam.getSubject().getTime())) {
+                            teachers.remove(teacher);
+                            Table t = (Table) clone();
+                            if (teacher instanceof TeacherAssistant) {
+                                LinkedList<TeacherAssistant> linkedList = (LinkedList<TeacherAssistant>) teachers;
+                                linkedList.add((TeacherAssistant) teacher);
+                            } else {
+                                LinkedList<Teacher> linkedList = (LinkedList<Teacher>) teachers;
+                                linkedList.add(teacher);
+                            }
+                            t.addW(teacher);
+                            if (teacher.getConstrain().isPreferTime(currentExam.getSubject().getTime())) {
+                                t.g = 1;
+                            } else {
+                                currentExam.addConstrainBreak(teacher.getName() + " dose not prefer time " + currentExam.getSubject().getTime());
+                                t.g = 2;
+                            }
+                            t.g += t.checkWatchesCount(teacher);
+                            ret.add(t);
                         }
-                        t.addW(teacher);
-                        if (teacher.getConstrain().isPreferTime(currentExam.getSubject().getTime())) {
-                            t.g = 1;
-                        } else {
-                            currentExam.addConstrainBreak(teacher.getName() + " dose not prefer time " + currentExam.getSubject().getTime());
-                            t.g = 2;
-                        }
-                        t.g += t.checkWatchesCount(teacher);
-                        ret.add(t);
                     }
         }
         return ret;
@@ -102,7 +111,7 @@ public class Table implements Cloneable {
     private int checkWatchesCount(Watcher w) {
         if (w instanceof Employee) {
             int cnt = 0;
-            for (int j = 0; j < 3; j++)
+            for (int j = 1; j <= 3; j++)
                 if (hashSet[currentExam.getSubject().getDay()][j].contains(w))
                     cnt++;
             if (cnt >= 1) {
@@ -113,7 +122,7 @@ public class Table implements Cloneable {
             return 0;
         } else {
             int cnt = 0;
-            for (int j = 0; j < 3; j++)
+            for (int j = 1; j <= 3; j++)
                 if (hashSet[currentExam.getSubject().getDay()][j].contains(w))
                     cnt++;
             if (cnt >= 2) {
@@ -155,19 +164,21 @@ public class Table implements Cloneable {
             if (watchesCount[student.getId()] <= student.getCntMax()) {
                 if (!hashSet[currentExam.getSubject().getDay()][currentExam.getSubject().getTime()].contains(student)) {
                     if (student.getConstrain().isAvailableAtDay(currentExam.getSubject().getDay())) {
-                        pendingStudents.remove(i);
-                        Table t = (Table) clone();
-                        pendingStudents.add(i, student);
+                        if (student.getConstrain().isAvailableAtTime(currentExam.getSubject().getTime())) {
+                            pendingStudents.remove(i);
+                            Table t = (Table) clone();
+                            pendingStudents.add(i, student);
 
-                        t.addW(student);
-                        if (student.getConstrain().isPreferTime(currentExam.getSubject().getTime())) {
-                            t.g = 1;
-                        } else {
-                            currentExam.addConstrainBreak(student.getName() + " dose not prefer time " + currentExam.getSubject().getTime());
-                            t.g = 2;
+                            t.addW(student);
+                            if (student.getConstrain().isPreferTime(currentExam.getSubject().getTime())) {
+                                t.g = 1;
+                            } else {
+                                currentExam.addConstrainBreak(student.getName() + " dose not prefer time " + currentExam.getSubject().getTime());
+                                t.g = 2;
+                            }
+                            t.g += t.checkWatchesCount(student);
+                            ret.add(t);
                         }
-                        t.g += t.checkWatchesCount(student);
-                        ret.add(t);
                     }
                 }
             }
@@ -198,9 +209,12 @@ public class Table implements Cloneable {
                     pendingStudents.addAll(Main.students);
                 ArrayList<Table> tables = selectStudent();
                 if (tables.isEmpty()) {
+                    if (pendingEmployees.isEmpty())
+                        pendingEmployees.addAll(Main.employees);
                     tables = selectEmployee();
                     for (Table t : tables) {
-                        t.g = 2;
+                        t.currentExam.addConstrainBreak("Add an employee rather than a student");
+                        t.g += 2;
                         ret.add(t);
                     }
                 } else
@@ -213,9 +227,12 @@ public class Table implements Cloneable {
     private ArrayList<Table> generateNext(ArrayList<ClassRoom> classRooms) {
         if (currentExam == null)
             return selectClassRoom(classRooms);
-        //if you are sure that the added watchers is what the exam need -> only check for sizes
         if (currentExam.isValid()) {
             list.add(currentExam);
+            Subject s = pendingSubjects.peek();
+            s.setStudentsCnt(Math.min(s.getStudentsCnt() - currentExam.getClassRoom().getCap(), 0));
+            if (s.getStudentsCnt() == 0)
+                pendingSubjects.poll();
             currentExam = null;
             return selectClassRoom(classRooms);
         } else
@@ -257,7 +274,10 @@ public class Table implements Cloneable {
                 t.hashSet[i][j] = (HashSet<Watcher>) t.hashSet[i][j].clone();
 
         t.g = g;
-        t.currentExam = (Exam) currentExam.clone();
+        if (t.currentExam != null)
+            t.currentExam = (Exam) currentExam.clone();
+        else
+            t.currentExam = null;
         return t;
     }
 
@@ -269,6 +289,7 @@ public class Table implements Cloneable {
         pq.add(new PqPair<>(0, table));
 
         HashMap<Table, Integer> mp = new HashMap<>();
+        mp.put(table, 0);
         while (!pq.isEmpty()) {
 
             PqPair<Table> p = pq.poll();
@@ -297,6 +318,54 @@ public class Table implements Cloneable {
                 } else {
                     mp.put(child, child.g + cost);
                     pq.add(new PqPair<>(child.g + cost, child));
+                }
+            }
+        }
+    }
+
+    public static void AStar() {
+        PriorityQueue<PqPair<PqPair<Table>>> pq = new PriorityQueue<>();
+        Table table = new Table();
+        table.pendingSubjects.addAll(Main.subjects);
+        pq.add(new PqPair<>(0, new PqPair<>(0, table)));
+
+        HashMap<Table, Integer> mp = new HashMap<>();
+        mp.put(table, 0);
+        HashMap<Table, Integer> gmp = new HashMap<>();
+        mp.put(table, 0);
+        while (!pq.isEmpty()) {
+
+            PqPair<PqPair<Table>> p = pq.poll();
+            Integer fCost = p.first;
+            Integer gCost = p.second.first;
+            Table t = p.second.second;
+
+
+            if (t.isFinal()) {
+                //TODO printing Table content and constrains break
+                return;
+            }
+
+            if (mp.containsKey(t))
+                if (fCost > mp.get(t))
+                    continue;
+
+            ArrayList<Table> list = t.generateNext(Main.ClassRooms);
+
+            for (Table child : list) {
+                if (mp.containsKey(child)) {
+                    int oldCost = mp.get(child);
+                    int newCost = fCost + child.g + child.h1();
+                    if (oldCost > newCost) {
+                        mp.put(child, newCost);
+                        mp.put(child, child.g + gCost);
+                        pq.add(new PqPair<>(newCost, new PqPair<>(gCost + child.g, child)));
+                    }
+                } else {
+                    int f = fCost + child.g + child.h1();
+                    mp.put(child, f);
+                    mp.put(child, gCost + child.g);
+                    pq.add(new PqPair<>(f, new PqPair<>(gCost + child.g, child)));
                 }
             }
         }

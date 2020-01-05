@@ -1,23 +1,23 @@
 import java.util.Objects;
 
 public class Constrain implements Cloneable {
-    private int mainDaysMask;
-    private int secondaryDaysMask;
-    private int mainTimesMask;
-    private int secondaryTimesMask;
+    private String mainDaysMask;
+    private String secondaryDaysMask;
+    private String mainTimesMask;
+    private String secondaryTimesMask;
     private int conDay;//main
     private int cntDay;//secondary
 
     public Constrain() {
-        mainDaysMask = (1 << 5) - 1;
-        mainTimesMask = (1 << 3) - 1;
+        mainDaysMask = "11111";
+        mainTimesMask = "111";
         secondaryTimesMask = mainTimesMask;
         secondaryDaysMask = mainDaysMask;
         conDay = 3;
         cntDay = 3;
     }
 
-    private Constrain(int mainDaysMask, int secondaryDaysMask, int mainTimesMask, int secondaryTimesMask, int conDay, int cntDay) {
+    private Constrain(String mainDaysMask, String secondaryDaysMask, String mainTimesMask, String secondaryTimesMask, int conDay, int cntDay) {
         this.mainDaysMask = mainDaysMask;
         this.secondaryDaysMask = secondaryDaysMask;
         this.mainTimesMask = mainTimesMask;
@@ -27,53 +27,19 @@ public class Constrain implements Cloneable {
     }
 
     public boolean isAvailableAtDay(int i) {
-        return (mainDaysMask & (1 << (i - 1))) != 0;
+        return mainDaysMask.charAt(i - 1) == '1';
     }
 
     public boolean isPreferDay(int i) {
-        return (secondaryDaysMask & (1 << (i - 1))) != 0;
+        return secondaryTimesMask.charAt(i - 1) == '1';
     }
 
     public boolean isAvailableAtTime(int i) {
-        return (mainTimesMask & (1 << (i - 1))) != 0;
+        return mainTimesMask.charAt(i - 1) == '1';
     }
 
     public boolean isPreferTime(int i) {
-        return (secondaryTimesMask & (1 << (i - 1))) != 0;
-    }
-
-    public void setAvailableAtDay(int i){
-        mainDaysMask |= (1 << (i - 1));
-    }
-
-    public void setPreferDay(int i){
-        secondaryDaysMask |= (1 << (i - 1));
-    }
-
-    public void setAvailableAtTime(int i){
-        mainTimesMask |= (1 << (i - 1));
-    }
-
-    public void setPreferTime(int i){
-        secondaryTimesMask |= (1 << (i - 1));
-    }
-
-    public void unSetAvailableAtDay(int i) {
-        mainDaysMask &= ~(1 << (i - 1));
-        secondaryDaysMask &= ~(1 << (i - 1));
-    }
-
-    public void unSetPreferDay(int i) {
-        secondaryDaysMask &= ~(1 << (i - 1));
-    }
-
-    public void unSetAvailableAtTime(int i) {
-        mainTimesMask &= ~(1 << (i - 1));
-        secondaryTimesMask &= ~(1 << (i - 1));
-    }
-
-    public void unSetPreferTime(int i) {
-        secondaryTimesMask &= ~(1 << (i - 1));
+        return secondaryTimesMask.charAt(i - 1) == '1';
     }
 
     public int getConDay() {
@@ -82,14 +48,6 @@ public class Constrain implements Cloneable {
 
     public int getCntDay() {
         return cntDay;
-    }
-
-    public void setConDay(int conDay) {
-        this.conDay = conDay;
-    }
-
-    public void setCntDay(int cntDay) {
-        this.cntDay = cntDay;
     }
 
     @Override

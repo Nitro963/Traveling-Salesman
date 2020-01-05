@@ -24,6 +24,8 @@ public class Exam implements Comparable<Exam>, Cloneable {
         switch (classRoom.getCap()) {
             case 30: {
                 watchersTypes.add("Watcher");
+                watchersTypes.add("Teacher");
+                watchersTypes.add("Employee");
                 break;
             }
             case 50: {
@@ -64,10 +66,6 @@ public class Exam implements Comparable<Exam>, Cloneable {
         return watchersTypes.get(watchers.size());
     }
 
-    public LinkedList<String> getWatchersTypes() {
-        return watchersTypes;
-    }
-
     public void addConstrainBreak(String s) {
         constrainBreak.add(s);
     }
@@ -80,16 +78,6 @@ public class Exam implements Comparable<Exam>, Cloneable {
             if (secretary == null)
                 secretary = (Employee) w;
         watchers.add(w);
-    }
-
-    public void setClassRoomPresident(Teacher t){
-        watchers.add(t);
-        head = t;
-    }
-
-    public void setClassRoomEmp(Employee emp){
-        watchers.add(emp);
-        this.secretary = emp;
     }
 
     public Teacher getHead() {
@@ -130,8 +118,8 @@ public class Exam implements Comparable<Exam>, Cloneable {
     }
 
     public boolean isValid() {
-        if (watchersTypes.size() != watchers.size())
-            return false;
+        return watchersTypes.size() == watchers.size();
+        /*
         LinkedList<String> list = new LinkedList<>();
         Collections.copy(list, watchersTypes);
         for (Watcher w : watchers) {
@@ -146,5 +134,7 @@ public class Exam implements Comparable<Exam>, Cloneable {
                 return false;
         }
         return true;
+
+         */
     }
 }
