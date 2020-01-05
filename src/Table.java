@@ -100,6 +100,10 @@ public class Table implements Cloneable {
                                 currentExam.addConstrainBreak(teacher.getName() + " dose not prefer time " + currentExam.getSubject().getTime());
                                 t.g = 2;
                             }
+                            if (!teacher.getConstrain().isPreferDay(currentExam.getSubject().getDay())) {
+                                t.currentExam.addConstrainBreak(teacher.getName() + "dose not prefer day " + currentExam.getSubject().getDay());
+                                t.g += 2;
+                            }
                             t.g += t.checkWatchesCount(teacher);
                             ret.add(t);
                         }
@@ -175,6 +179,10 @@ public class Table implements Cloneable {
                             } else {
                                 currentExam.addConstrainBreak(student.getName() + " dose not prefer time " + currentExam.getSubject().getTime());
                                 t.g = 2;
+                            }
+                            if (!student.getConstrain().isPreferDay(currentExam.getSubject().getDay())) {
+                                t.currentExam.addConstrainBreak(student.getName() + "dose not prefer day " + currentExam.getSubject().getDay());
+                                t.g += 2;
                             }
                             t.g += t.checkWatchesCount(student);
                             ret.add(t);

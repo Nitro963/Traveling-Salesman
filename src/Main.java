@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 
 public class Main {
-    public static ArrayList<Watcher> Watchers = new ArrayList<>();
     public static ArrayList<Teacher> teachers = new ArrayList<>();
     public static ArrayList<TeacherAssistant> teacherAssistants = new ArrayList<>();
     public static ArrayList<Employee> employees = new ArrayList<>();
