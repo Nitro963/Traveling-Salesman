@@ -242,6 +242,20 @@ public class Table implements Cloneable {
         if (!pendingSubjects.isEmpty()) {
             if (currentExam.isValid()) {
                 list.add(currentExam);
+                /*
+                //possible bug be careful
+                for (Watcher w: currentExam.getWatchers()) {
+                    if(w instanceof TeacherAssistant)
+                        pendingTeachersAssistant.remove(w);
+                    else
+                        if(w instanceof Teacher)
+                            pendingTeachers.remove(w);
+                    if(w instanceof MasterStudent)
+                        pendingStudents.remove(w);
+                    if(w instanceof Employee)
+                        pendingEmployees.remove(w);
+                }
+                 */
                 Subject s = pendingSubjects.peek();
                 s.setStudentsCnt(Math.min(s.getStudentsCnt() - currentExam.getClassRoom().getCap(), 0));
                 if (s.getStudentsCnt() == 0)
