@@ -4,15 +4,15 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class TSP_State implements Cloneable {
-    ArrayList<Integer> list;
-    int currentCity;
+    private ArrayList<Integer> list;
+    private int currentCity;
 
-    public TSP_State() {
+    private TSP_State() {
         currentCity = -1;
         list = new ArrayList<>();
     }
 
-    ArrayList<TSP_State> generateNext(ArrayList<Integer> nodes) {
+    private ArrayList<TSP_State> generateNext(ArrayList<Integer> nodes) {
 
         ArrayList<TSP_State> ret = new ArrayList<>();
         for (Integer next : nodes) {
@@ -26,9 +26,8 @@ public class TSP_State implements Cloneable {
         return ret;
     }
 
-    public boolean isFinal(ArrayList<Integer> nodes) {
-        TreeSet<Integer> set = new TreeSet<>();
-        set.addAll(nodes);
+    private boolean isFinal(ArrayList<Integer> nodes) {
+        TreeSet<Integer> set = new TreeSet<>(nodes);
         set.removeAll(list);
         if (set.isEmpty())
             return list.get(0) == currentCity;
@@ -88,6 +87,7 @@ public class TSP_State implements Cloneable {
             PqPair<TSP_State> p = pq.poll();
             Integer cost = p.first;
             TSP_State s = p.second;
+            System.out.println(s.list);
 
             if (s.isFinal(nodes)) {
                 System.out.println("fuck!! it's solved");

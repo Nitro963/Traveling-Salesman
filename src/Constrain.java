@@ -5,8 +5,8 @@ public class Constrain implements Cloneable {
     private int secondaryDaysMask;
     private int mainTimesMask;
     private int secondaryTimesMask;
-    private int conDay;
-    private int cntDay;
+    private int conDay;//main
+    private int cntDay;//secondary
 
     public Constrain() {
         mainDaysMask = (1 << 5) - 1;

@@ -14,28 +14,6 @@ public class Table implements Cloneable {
     private int[] watchesCount;
     private int g;//Traversing cost(Graph edge)
 
-    private static ArrayList<Integer>[] masks = new ArrayList[3];
-
-    static {
- /*       for(int i = 0; i < 3;i++) {
-            masks[i] = new ArrayList<>();
-            for(int j = 1; j < (1 << 25);j++){
-                int cnt = 0;
-                int msk = j;
-                while(msk != 0) {
-                    cnt++;
-                    msk &= (msk - 1);
-                }
-                if(cnt == (i + 2))
-                    masks[i].add(msk);
-            }
-        }
-        for(int i = 0;i < 3;i++)
-            System.out.println(masks[i].size());
-
-  */
-    }
-
     public Table() {
         list = new ArrayList<>();
         hashSet = new HashSet[10][5];
@@ -57,6 +35,18 @@ public class Table implements Cloneable {
         currentExam.addWatcher(w);
         watchesCount[w.getId()]++;
         hashSet[currentExam.getSubject().getDay()][currentExam.getSubject().getTime()].add(w);
+    }
+
+    private boolean checkConDay(Watcher w) {
+        if (w.getConstrain().getConDay() == -1)
+            return true;
+        int cnt = 0;
+        for (int j = 0; j < 3; j++)
+            if (hashSet[currentExam.getSubject().getDay()][j].contains(w))
+                cnt++;
+            else
+                cnt = 0;
+        return cnt <= w.getConstrain().getConDay();
     }
 
     private ArrayList<Table> selectClassRoom(ArrayList<ClassRoom> classRooms) {
@@ -81,6 +71,8 @@ public class Table implements Cloneable {
         ArrayList<Table> ret = new ArrayList<>();
         for (int i = 0; i < teachers.size(); i++) {
             Teacher teacher = teachers.get(i);
+            if (this.checkConDay(teacher))
+                continue;
             if (watchesCount[teacher.id] + 1 <= teacher.getCntMax())
                 if (!hashSet[currentExam.getSubject().getDay()][currentExam.getSubject().getTime()].contains(teacher))
                     if (teacher.getConstrain().isAvailableAtDay(currentExam.getSubject().getDay())) {
@@ -97,12 +89,42 @@ public class Table implements Cloneable {
                         if (teacher.getConstrain().isPreferTime(currentExam.getSubject().getTime())) {
                             t.g = 1;
                         } else {
+                            currentExam.addConstrainBreak(teacher.getName() + " dose not prefer time " + currentExam.getSubject().getTime());
                             t.g = 2;
                         }
+                        t.g += t.checkWatchesCount(teacher);
                         ret.add(t);
                     }
         }
         return ret;
+    }
+
+    private int checkWatchesCount(Watcher w) {
+        if (w instanceof Employee) {
+            int cnt = 0;
+            for (int j = 0; j < 3; j++)
+                if (hashSet[currentExam.getSubject().getDay()][j].contains(w))
+                    cnt++;
+            if (cnt >= 1) {
+                currentExam.addConstrainBreak("Employee " + w.getName() +
+                        " has more than 1 watch at day" + currentExam.getSubject().getDay());
+                return 1;
+            }
+            return 0;
+        } else {
+            int cnt = 0;
+            for (int j = 0; j < 3; j++)
+                if (hashSet[currentExam.getSubject().getDay()][j].contains(w))
+                    cnt++;
+            if (cnt >= 2) {
+                if (w.getConstrain().getCntDay() < cnt) {
+                    currentExam.addConstrainBreak("watcher " + w.getName() +
+                            " has more than 2 watch at day" + currentExam.getSubject().getDay());
+                    return 1;
+                }
+            }
+            return 0;
+        }
     }
 
     private ArrayList<Table> selectEmployee() {
@@ -115,6 +137,8 @@ public class Table implements Cloneable {
                 pendingEmployees.add(i, emp);
                 t.addW(emp);
                 t.g = 1;
+                t.g += t.checkWatchesCount(emp);
+
                 ret.add(t);
             }
         }
@@ -125,6 +149,9 @@ public class Table implements Cloneable {
         ArrayList<Table> ret = new ArrayList<>();
         for (int i = 0; i < pendingStudents.size(); i++) {
             MasterStudent student = pendingStudents.get(i);
+            if (this.checkConDay(student))
+                continue;
+
             if (watchesCount[student.getId()] <= student.getCntMax()) {
                 if (!hashSet[currentExam.getSubject().getDay()][currentExam.getSubject().getTime()].contains(student)) {
                     if (student.getConstrain().isAvailableAtDay(currentExam.getSubject().getDay())) {
@@ -136,8 +163,10 @@ public class Table implements Cloneable {
                         if (student.getConstrain().isPreferTime(currentExam.getSubject().getTime())) {
                             t.g = 1;
                         } else {
+                            currentExam.addConstrainBreak(student.getName() + " dose not prefer time " + currentExam.getSubject().getTime());
                             t.g = 2;
                         }
+                        t.g += t.checkWatchesCount(student);
                         ret.add(t);
                     }
                 }
@@ -208,14 +237,17 @@ public class Table implements Cloneable {
     protected Object clone() {
         Table t = new Table();
         Collections.copy(t.list, list);
-        for (int i = 0; i < pendingSubjects.size(); i++)
-            t.pendingSubjects.add((Subject) pendingSubjects.get(i).clone());
-
+        Collections.copy(t.pendingSubjects, pendingSubjects);
+        Collections.copy(t.pendingStudents, pendingStudents);
+        Collections.copy(t.pendingEmployees, pendingEmployees);
+        Collections.copy(t.pendingTeachersAssistant, pendingTeachersAssistant);
+        Collections.copy(t.pendingTeachers, pendingTeachers);
+        /*
         t.pendingTeachers = (LinkedList<Teacher>) pendingTeachers.clone();
         t.pendingEmployees = (LinkedList<Employee>) pendingEmployees.clone();
         t.pendingStudents = (LinkedList<MasterStudent>) pendingStudents.clone();
         t.pendingTeachersAssistant = (LinkedList<TeacherAssistant>) pendingTeachersAssistant.clone();
-
+        */
         for (int i = 0; i < t.classRoomHashSet.length; i++)
             for (int j = 0; j < t.classRoomHashSet[i].length; j++)
                 t.classRoomHashSet[i][j] = (HashSet<ClassRoom>) t.classRoomHashSet[i][j].clone();

@@ -24,18 +24,20 @@ public class Exam implements Comparable<Exam>, Cloneable {
         switch (classRoom.getCap()) {
             case 30: {
                 watchersTypes.add("Watcher");
-                watchersTypes.add("Watcher");
                 break;
             }
             case 50: {
                 watchersTypes.add("Teacher");
                 watchersTypes.add("Employee");
                 watchersTypes.add("Watcher");
+                watchersTypes.add("Watcher");
                 break;
             }
             case 70: {
                 watchersTypes.add("Teacher");
                 watchersTypes.add("Employee");
+                watchersTypes.add("Watcher");
+                watchersTypes.add("Watcher");
                 watchersTypes.add("Watcher");
                 watchersTypes.add("Watcher");
                 break;
