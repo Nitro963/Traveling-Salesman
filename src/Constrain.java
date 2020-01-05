@@ -26,6 +26,13 @@ public class Constrain implements Cloneable {
         this.cntDay = cntDay;
     }
 
+    public Constrain(String mainDaysMask, String secondaryDaysMask, long conDay, long cntDay) {
+        this.mainDaysMask = mainDaysMask;
+        this.secondaryDaysMask = secondaryDaysMask;
+        this.cntDay = (int) cntDay;
+        this.conDay = (int) conDay;
+    }
+
     public boolean isAvailableAtDay(int i) {
         return mainDaysMask.charAt(i - 1) == '1';
     }
