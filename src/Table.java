@@ -235,26 +235,22 @@ public class Table implements Cloneable {
     private ArrayList<Table> generateNext(ArrayList<ClassRoom> classRooms) {
         if (currentExam == null)
             return selectClassRoom(classRooms);
-        if (currentExam.isValid()) {
-            list.add(currentExam);
-            Subject s = pendingSubjects.peek();
-            s.setStudentsCnt(Math.min(s.getStudentsCnt() - currentExam.getClassRoom().getCap(), 0));
-            if (s.getStudentsCnt() == 0)
-                pendingSubjects.poll();
-            currentExam = null;
-            return selectClassRoom(classRooms);
-        } else
-            return selectWatcher();
+        return selectWatcher();
     }
 
     public boolean isFinal() {
         if (!pendingSubjects.isEmpty()) {
-            Subject s = pendingSubjects.peek();
-            if (s.getStudentsCnt() == 0)
-                pendingSubjects.poll();
-            return pendingSubjects.isEmpty();
+            if (currentExam.isValid()) {
+                list.add(currentExam);
+                Subject s = pendingSubjects.peek();
+                s.setStudentsCnt(Math.min(s.getStudentsCnt() - currentExam.getClassRoom().getCap(), 0));
+                if (s.getStudentsCnt() == 0)
+                    pendingSubjects.poll();
+                currentExam = null;
+                return pendingSubjects.isEmpty();
+            }
         }
-        return true;
+        return pendingSubjects.isEmpty();
     }
 
     //(deep/shallow) cloning
