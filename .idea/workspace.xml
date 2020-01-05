@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0271a15f-01f2-45c4-982b-d0d9a4eb3a4f" name="Default Changelist" comment="">
+    <list default="true" id="0271a15f-01f2-45c4-982b-d0d9a4eb3a4f" name="Default Changelist" comment="Room constrain are ready">
+      <change afterPath="$PROJECT_DIR$/src/Subjects.code-workspace.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tables.code-workspace.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Watchers.code-workspace.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/read.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project1/META-INF/Project1.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ClassRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClassRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Subject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Subject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TSP_State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TSP_State.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Table.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,11 +36,21 @@
         <option value="Nitro963 &lt;adnankattan9@gmail.com&gt;" />
       </list>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="3989011fbddf3d4b922d4fd87a519bce860bc9b8" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1VWKNA2LMUa8Qn0fcrb9WekGhTc" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
@@ -39,25 +58,19 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$USER_HOME$/json-simple-1.1.jar!/" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\NSEARATY\IdeaProjects\intelligentAlgoPr\src" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="Main" />
-    </option>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
     </option>
   </component>
   <component name="RunManager">
@@ -71,8 +84,22 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -106,49 +133,13 @@
       <option name="project" value="LOCAL" />
       <updated>1578077755191</updated>
     </task>
-    <task id="LOCAL-00004" summary="TableGeneration">
-      <created>1578122035381</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1578122035381</updated>
+    <task id="LOCAL؜٠٠٠٠٤" summary="Room constrain are ready">
+      <created>1578208510566</created>
+      <option name="number" value="LOCAL؜٠٠٠٠٤" />
+      <option name="presentableId" value="LOCAL؜٠٠٠٠٤" />
+      <updated>1578208510566</updated>
     </task>
-    <task id="LOCAL-00005" summary="TableGeneration">
-      <created>1578142767437</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1578142767437</updated>
-    </task>
-    <task id="LOCAL-00006" summary="end of checking watchers Constrains">
-      <created>1578213871310</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1578213871310</updated>
-    </task>
-    <task id="LOCAL-00007" summary="fixed bugs">
-      <created>1578237262430</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1578237262430</updated>
-    </task>
-    <task id="LOCAL-00008" summary="fixed bugs">
-      <created>1578237990449</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1578237990449</updated>
-    </task>
-    <task id="LOCAL-00009" summary="fixed bugs">
-      <created>1578238531063</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1578238531063</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -169,12 +160,100 @@
     <MESSAGE value="modified structure and greedy approach" />
     <MESSAGE value="TableClass" />
     <MESSAGE value="TSP and Fixed bugs" />
-    <MESSAGE value="TableGeneration" />
-    <MESSAGE value="end of checking watchers Constrains" />
-    <MESSAGE value="fixed bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bugs" />
+    <MESSAGE value="Room constrain are ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="Room constrain are ready" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="361" y="72" key="#Plugins" timestamp="1578254239443">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="72" key="#Plugins/0.0.1536.824@0.0.1536.824" timestamp="1578254239443" />
+    <state x="655" y="11" key="CommitChangelistDialog2" timestamp="1578208509888">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="655" y="11" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1578208509888" />
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1578253155046">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1578253155046" />
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom" timestamp="1578255527656">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578255527656" />
+    <state width="1493" height="261" key="GridCell.Tab.0.center" timestamp="1578255527656">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1578255527656" />
+    <state width="1493" height="261" key="GridCell.Tab.0.left" timestamp="1578255527656">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1578255527656" />
+    <state width="1493" height="261" key="GridCell.Tab.0.right" timestamp="1578255527656">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1578255527656" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1578255527657">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578255527657" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1578255527657">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1578255527657" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1578255527656">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1578255527656" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1578255527657">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1578255527657" />
+    <state x="481" y="129" key="MultipleFileMergeDialog" timestamp="1578158477900">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="481" y="129" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1578158477900" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1578253157565">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1578253157565" />
+    <state x="862" y="100" width="581" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1578208387523">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="862" y="100" width="581" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1578208387523" />
+    <state x="550" y="126" key="git4idea.branch.GitSmartOperationDialog" timestamp="1578158505282">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="550" y="126" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.824@0.0.1536.824" timestamp="1578158505282" />
+    <state x="209" y="115" key="new project wizard" timestamp="1578158890978">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="209" y="115" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1578158890978" />
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1578254707657">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1578254707657" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1578254196964">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1578254196964" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/read.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project1$Main.ic" NAME="Main Coverage Results" MODIFIED="1577364295852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

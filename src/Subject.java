@@ -5,11 +5,11 @@ public class Subject implements Comparable<Subject>, Cloneable {
     private int studentsCnt;
     private int day, time;
 
-    public Subject(String name, int studentsCnt, int day, int time) {
+    public Subject(String name, long studentsCnt, long day, long time) {
         this.name = name;
-        this.studentsCnt = studentsCnt;
-        this.day = day;
-        this.time = time;
+        this.studentsCnt = (int) studentsCnt;
+        this.day = (int) day;
+        this.time = (int) time;
     }
 
     public String getName() {

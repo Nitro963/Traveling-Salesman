@@ -5,10 +5,10 @@ public class ClassRoom implements Comparable<ClassRoom>, Cloneable {
     private int floor;
     private int cap;
 
-    public ClassRoom(String name, int floor, int cap) {
+    public ClassRoom(String name, long floor, long cap) {
         this.name = name;
-        this.floor = floor;
-        this.cap = cap;
+        this.floor = (int) floor;
+        this.cap = (int) cap;
     }
 
     public String getName() {
