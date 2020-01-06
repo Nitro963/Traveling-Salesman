@@ -24,9 +24,9 @@ public class Exam implements Comparable<Exam>, Cloneable {
         watchersTypes = new LinkedList<>();
         switch (classRoom.getCap()) {
             case 30: {
-                watchersTypes.add("Watcher");
                 watchersTypes.add("Teacher");
                 watchersTypes.add("Employee");
+                watchersTypes.add("Watcher");
                 break;
             }
             case 50: {

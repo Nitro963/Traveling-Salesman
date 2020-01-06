@@ -6,11 +6,11 @@ public class Table implements Cloneable {
     private HashSet<Watcher>[][] hashSet;//at Day i and time j is the watcher x Taken?
     private HashSet<ClassRoom>[][] classRoomHashSet;//at Day i and time j is the classroom x taken?
     private LinkedList<Subject> pendingSubjects;//pending subjects to add to the exam list
+    //pending watchers to take a watch(fair distribution)
     private LinkedList<Teacher> pendingTeachers;
     private LinkedList<TeacherAssistant> pendingTeachersAssistant;
     private LinkedList<Employee> pendingEmployees;
     private LinkedList<MasterStudent> pendingStudents;
-
     private int[] watchesCount;
     private int g;//Traversing cost(Graph edge)
 
@@ -82,8 +82,10 @@ public class Table implements Cloneable {
         ArrayList<Table> ret = new ArrayList<>();
         for (int i = 0; i < teachers.size(); i++) {
             Teacher teacher = teachers.get(i);
-            if (this.checkConDay(teacher))
+            if (!this.checkConDay(teacher)) {
+                System.out.println("con day");
                 continue;
+            }
             if (watchesCount[teacher.id] + 1 <= teacher.getCntMax())
                 if (!hashSet[currentExam.getSubject().getDay()][currentExam.getSubject().getTime()].contains(teacher))
                     if (teacher.getConstrain().isAvailableAtDay(currentExam.getSubject().getDay())) {
@@ -166,7 +168,7 @@ public class Table implements Cloneable {
         ArrayList<Table> ret = new ArrayList<>();
         for (int i = 0; i < pendingStudents.size(); i++) {
             MasterStudent student = pendingStudents.get(i);
-            if (this.checkConDay(student))
+            if (!this.checkConDay(student))
                 continue;
 
             if (watchesCount[student.getId()] <= student.getCntMax()) {
@@ -200,8 +202,10 @@ public class Table implements Cloneable {
 
     private ArrayList<Table> selectWatcher() {
         ArrayList<Table> ret = new ArrayList<>();
-        if (currentExam.getWatcherNeed() >= currentExam.getWatchers().size())
+        if (currentExam.getWatcherNeed() <= currentExam.getWatchers().size()) {
             return ret;
+        }
+        System.out.println(currentExam.getNextWatcher());
         switch (currentExam.getNextWatcher()) {
             case "Teacher": {
                 if (pendingTeachers.isEmpty())
@@ -209,12 +213,15 @@ public class Table implements Cloneable {
                 if (pendingTeachersAssistant.isEmpty())
                     pendingTeachersAssistant.addAll(Main.teacherAssistants);
                 ret.addAll(selectTeacher(pendingTeachers));
-                ret.addAll(selectTeacher(pendingTeachersAssistant));
+
+                //ret.addAll(selectTeacher(pendingTeachersAssistant));
+                break;
             }
             case "Employee": {
                 if (pendingEmployees.isEmpty())
                     pendingEmployees.addAll(Main.employees);
                 ret.addAll(selectEmployee());
+                break;
             }
             case "Watcher": {
                 if (pendingStudents.isEmpty())
@@ -231,15 +238,21 @@ public class Table implements Cloneable {
                     }
                 } else
                     ret.addAll(tables);
+                break;
             }
+
         }
         return ret;
     }
 
     private ArrayList<Table> generateNext(ArrayList<ClassRoom> classRooms) {
-        if (currentExam == null)
-            return selectClassRoom(classRooms);
-        return selectWatcher();
+        if (currentExam == null) {
+            ArrayList<Table> tables = selectClassRoom(classRooms);
+            return tables;
+        }
+        ArrayList<Table> tables = selectWatcher();
+        System.out.println(tables.size());
+        return tables;
     }
 
     public boolean isFinal() {
@@ -292,10 +305,13 @@ public class Table implements Cloneable {
                 t.hashSet[i][j] = (HashSet<Watcher>) t.hashSet[i][j].clone();
 
         t.g = g;
-        if (t.currentExam != null)
+        if (t.currentExam != null) {
+            System.out.println("cloned");
             t.currentExam = (Exam) currentExam.clone();
+        }
         else
             t.currentExam = null;
+        watchesCount = Arrays.copyOf(watchesCount, watchesCount.length);
         return t;
     }
 

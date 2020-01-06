@@ -28,14 +28,15 @@ public class Main {
         subjects.add(((ArrayList<Subject>) map.get("subjects")).get(0));
         teachers.add(((ArrayList<Teacher>) map.get("teachers")).get(0));
         students.add(((ArrayList<MasterStudent>) map.get("master")).get(0));
+        ClassRooms.add(((ArrayList<ClassRoom>) map.get("rooms")).get(0));
 
         System.out.println(employees.get(0));
         System.out.println(teachers.get(0));
         System.out.println(students.get(0));
         System.out.println(subjects.get(0));
-        System.out.println(subjects.size());
+        System.out.println(ClassRooms.get(0));
         Table t = Table.solve();
-        System.out.println(t);
+        //System.out.println(t);
 
 
     }

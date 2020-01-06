@@ -59,7 +59,7 @@ public class read {
                         MasterStudent masterStudent = new MasterStudent((String) jsonObject.get("name"), id,
                                 new Constrain(
                                         (String) ((JSONObject) object).get("days"), (String) ((JSONObject) object).get("secDays"), (long) ((JSONObject) object).get("conTime"), (long) ((JSONObject) object).get("cntTime")
-                                ), 0);
+                                ));
                         masterStudents.add(masterStudent);
                         break;
                     }
@@ -84,7 +84,7 @@ public class read {
                         break;
                     }
                     case "Employee": {
-                        Employee employee = new Employee((String) jsonObject.get("name"), id, 0);
+                        Employee employee = new Employee((String) jsonObject.get("name"), id);
                         employees.add(employee);
                         break;
                     }

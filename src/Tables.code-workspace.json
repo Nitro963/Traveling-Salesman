@@ -2,8 +2,8 @@
   {
     "name": "ٌroom 1",
     "floor": 1,
-    "cap": 70,
-    "watcherNeed": 4
+    "cap": 30,
+    "watcherNeed": 3
   },
   {
     "name": "ٌroom 2",
