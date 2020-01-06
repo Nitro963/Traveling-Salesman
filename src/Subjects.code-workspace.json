@@ -1,13 +1,13 @@
 [
   {
     "name": "Math 1",
-    "studentCnt": 100,
+    "studentCnt": 60,
     "day": 1,
     "time": 1
   },
   {
     "name": "Math 2",
-    "studentCnt": 50,
+    "studentCnt": 30,
     "day": 1,
     "time": 2
   }

@@ -16,13 +16,13 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         read r = new read();
         HashMap<String, Object> map = r.ReadJson();
-        Main.classRooms = (ArrayList<ClassRoom>) map.get("rooms");
-        Main.subjects = (ArrayList<Subject>) map.get("subjects");
-        Main.employees = (ArrayList<Employee>) map.get("employees");
-        Main.teacherAssistants = (ArrayList<TeacherAssistant>) map.get("teacherAssistants");
-        Main.teachers = (ArrayList<Teacher>) map.get("teachers");
-        Main.students = (ArrayList<MasterStudent>) map.get("master");
-
+        classRooms = (ArrayList<ClassRoom>) map.get("rooms");
+        classRooms.sort(ClassRoom::compareTo);
+        subjects = (ArrayList<Subject>) map.get("subjects");
+        employees = (ArrayList<Employee>) map.get("employees");
+        teacherAssistants = (ArrayList<TeacherAssistant>) map.get("teacherAssistants");
+        teachers = (ArrayList<Teacher>) map.get("teachers");
+        students = (ArrayList<MasterStudent>) map.get("master");
 
         Table t = Table.AStar();
         System.out.println(t);
