@@ -54,7 +54,8 @@ abstract public class Watcher implements Cloneable {
             Watcher w = (Watcher) super.clone();
             w.name = this.name;
             w.cntMax = cntMax;
-            w.constrain = (Constrain) this.constrain.clone();
+            if (constrain != null)
+                w.constrain = (Constrain) this.constrain.clone();
             w.type = type;
             w.id = id;
             return w;
@@ -68,4 +69,12 @@ abstract public class Watcher implements Cloneable {
         return type;
     }
 
+    @Override
+    public String toString() {
+        return "Watcher{" +
+                "name='" + name + '\'' +
+                ", constrain=" + constrain +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

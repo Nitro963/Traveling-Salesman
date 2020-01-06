@@ -28,7 +28,13 @@
         <option value="Nitro963 &lt;adnankattan9@gmail.com&gt;" />
       </list>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="KEEP" />
   </component>
   <component name="ProjectId" id="1VWKNA2LMUa8Qn0fcrb9WekGhTc" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -40,7 +46,8 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/json-simple-1.1.jar/json-simple-1.1.jar!/" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
@@ -156,7 +163,25 @@
       <option name="project" value="LOCAL" />
       <updated>1578239222902</updated>
     </task>
+<<<<<<< HEAD
     <option name="localTasksCounter" value="11" />
+=======
+    <task id="LOCAL-00011" summary="fixed bugs">
+      <created>1578241053405</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1578241053405</updated>
+    </task>
+    <task id="LOCAL-00012" summary="one subject work">
+      <created>1578302311933</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1578302311933</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+>>>>>>> Class_Branch
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -180,7 +205,8 @@
     <MESSAGE value="TableGeneration" />
     <MESSAGE value="end of checking watchers Constrains" />
     <MESSAGE value="fixed bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bugs" />
+    <MESSAGE value="one subject work" />
+    <option name="LAST_COMMIT_MESSAGE" value="one subject work" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

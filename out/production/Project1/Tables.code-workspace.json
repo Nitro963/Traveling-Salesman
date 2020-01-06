@@ -1,0 +1,50 @@
+[
+  {
+    "name": "ٌroom 1",
+    "floor": 1,
+    "cap": 30,
+    "watcherNeed": 3
+  },
+  {
+    "name": "ٌroom 2",
+    "floor": 1,
+    "cap": 50,
+    "watcherNeed": 3
+  },
+  {
+    "name": "ٌroom 3",
+    "floor": 1,
+    "cap": 30,
+    "watcherNeed": 2
+  },
+  {
+    "name": "ٌroom 4",
+    "floor": 2,
+    "cap": 50,
+    "watcherNeed": 3
+  },
+  {
+    "name": "ٌroom 5",
+    "floor": 2,
+    "cap": 30,
+    "watcherNeed": 2
+  },
+  {
+    "name": "ٌroom 6",
+    "floor": 3,
+    "cap": 50,
+    "watcherNeed": 3
+  },
+  {
+    "name": "ٌroom 7",
+    "floor": 3,
+    "cap": 50,
+    "watcherNeed": 3
+  },
+  {
+    "name": "ٌroom 8",
+    "floor": 3,
+    "cap": 70,
+    "watcherNeed": 7
+  }
+]

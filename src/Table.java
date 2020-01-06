@@ -6,13 +6,17 @@ public class Table implements Cloneable {
     private HashSet<Watcher>[][] hashSet;//at Day i and time j is the watcher x Taken?
     private HashSet<ClassRoom>[][] classRoomHashSet;//at Day i and time j is the classroom x taken?
     private LinkedList<Subject> pendingSubjects;//pending subjects to add to the exam list
+    //pending watchers to take a watch(fair distribution)
     private LinkedList<Teacher> pendingTeachers;
     private LinkedList<TeacherAssistant> pendingTeachersAssistant;
     private LinkedList<Employee> pendingEmployees;
     private LinkedList<MasterStudent> pendingStudents;
-
     private int[] watchesCount;
     private int g;//Traversing cost(Graph edge)
+
+    public Exam getCurrentExam() {
+        return currentExam;
+    }
 
     public Table() {
         list = new ArrayList<>();
@@ -78,7 +82,7 @@ public class Table implements Cloneable {
         ArrayList<Table> ret = new ArrayList<>();
         for (int i = 0; i < teachers.size(); i++) {
             Teacher teacher = teachers.get(i);
-            if (this.checkConDay(teacher))
+            if (!this.checkConDay(teacher))
                 continue;
             if (watchesCount[teacher.id] + 1 <= teacher.getCntMax())
                 if (!hashSet[currentExam.getSubject().getDay()][currentExam.getSubject().getTime()].contains(teacher))
@@ -118,7 +122,7 @@ public class Table implements Cloneable {
             for (int j = 1; j <= 3; j++)
                 if (hashSet[currentExam.getSubject().getDay()][j].contains(w))
                     cnt++;
-            if (cnt >= 1) {
+            if (cnt > 1) {
                 currentExam.addConstrainBreak("Employee " + w.getName() +
                         " has more than 1 watch at day" + currentExam.getSubject().getDay());
                 return 1;
@@ -162,7 +166,7 @@ public class Table implements Cloneable {
         ArrayList<Table> ret = new ArrayList<>();
         for (int i = 0; i < pendingStudents.size(); i++) {
             MasterStudent student = pendingStudents.get(i);
-            if (this.checkConDay(student))
+            if (!this.checkConDay(student))
                 continue;
 
             if (watchesCount[student.getId()] + 1 <= student.getCntMax()) {
@@ -196,8 +200,9 @@ public class Table implements Cloneable {
 
     private ArrayList<Table> selectWatcher() {
         ArrayList<Table> ret = new ArrayList<>();
-        if (currentExam.getWatcherNeed() >= currentExam.getWatchers().size())
+        if (currentExam.getWatcherNeed() <= currentExam.getWatchers().size()) {
             return ret;
+        }
         switch (currentExam.getNextWatcher()) {
             case "Teacher": {
                 if (pendingTeachers.isEmpty())
@@ -205,12 +210,15 @@ public class Table implements Cloneable {
                 if (pendingTeachersAssistant.isEmpty())
                     pendingTeachersAssistant.addAll(Main.teacherAssistants);
                 ret.addAll(selectTeacher(pendingTeachers));
-                ret.addAll(selectTeacher(pendingTeachersAssistant));
+
+                //ret.addAll(selectTeacher(pendingTeachersAssistant));
+                break;
             }
             case "Employee": {
                 if (pendingEmployees.isEmpty())
                     pendingEmployees.addAll(Main.employees);
                 ret.addAll(selectEmployee());
+                break;
             }
             case "Watcher": {
                 if (pendingStudents.isEmpty())
@@ -227,7 +235,9 @@ public class Table implements Cloneable {
                     }
                 } else
                     ret.addAll(tables);
+                break;
             }
+
         }
         return ret;
     }
@@ -240,27 +250,29 @@ public class Table implements Cloneable {
 
     public boolean isFinal() {
         if (!pendingSubjects.isEmpty()) {
-            if (currentExam.isValid()) {
-                list.add(currentExam);
-                /*
-                //possible bug be careful
-                for (Watcher w: currentExam.getWatchers()) {
-                    if(w instanceof TeacherAssistant)
-                        pendingTeachersAssistant.remove(w);
-                    else
-                        if(w instanceof Teacher)
-                            pendingTeachers.remove(w);
-                    if(w instanceof MasterStudent)
-                        pendingStudents.remove(w);
-                    if(w instanceof Employee)
-                        pendingEmployees.remove(w);
+            if (currentExam != null) {
+                if (currentExam.isValid()) {
+                    list.add(currentExam);
+                    /*
+                    //possible bug be careful
+                    for (Watcher w: currentExam.getWatchers()) {
+                        if(w instanceof TeacherAssistant)
+                            pendingTeachersAssistant.remove(w);
+                        else
+                            if(w instanceof Teacher)
+                                pendingTeachers.remove(w);
+                        if(w instanceof MasterStudent)
+                            pendingStudents.remove(w);
+                        if(w instanceof Employee)
+                            pendingEmployees.remove(w);
+                    }
+                     */
+                    Subject s = pendingSubjects.peek();
+                    s.setStudentsCnt(Math.min(s.getStudentsCnt() - currentExam.getClassRoom().getCap(), 0));
+                    if (s.getStudentsCnt() == 0)
+                        pendingSubjects.poll();
+                    currentExam = null;
                 }
-                 */
-                Subject s = pendingSubjects.peek();
-                s.setStudentsCnt(Math.min(s.getStudentsCnt() - currentExam.getClassRoom().getCap(), 0));
-                if (s.getStudentsCnt() == 0)
-                    pendingSubjects.poll();
-                currentExam = null;
                 return pendingSubjects.isEmpty();
             }
         }
@@ -271,18 +283,12 @@ public class Table implements Cloneable {
     @Override
     protected Object clone() {
         Table t = new Table();
-        Collections.copy(t.list, list);
-        Collections.copy(t.pendingSubjects, pendingSubjects);
-        Collections.copy(t.pendingStudents, pendingStudents);
-        Collections.copy(t.pendingEmployees, pendingEmployees);
-        Collections.copy(t.pendingTeachersAssistant, pendingTeachersAssistant);
-        Collections.copy(t.pendingTeachers, pendingTeachers);
-        /*
+        t.list = (ArrayList<Exam>) t.list.clone();
         t.pendingTeachers = (LinkedList<Teacher>) pendingTeachers.clone();
         t.pendingEmployees = (LinkedList<Employee>) pendingEmployees.clone();
         t.pendingStudents = (LinkedList<MasterStudent>) pendingStudents.clone();
         t.pendingTeachersAssistant = (LinkedList<TeacherAssistant>) pendingTeachersAssistant.clone();
-        */
+        t.pendingSubjects = (LinkedList<Subject>) pendingSubjects.clone();
         for (int i = 0; i < t.classRoomHashSet.length; i++)
             for (int j = 0; j < t.classRoomHashSet[i].length; j++)
                 t.classRoomHashSet[i][j] = (HashSet<ClassRoom>) t.classRoomHashSet[i][j].clone();
@@ -292,15 +298,64 @@ public class Table implements Cloneable {
                 t.hashSet[i][j] = (HashSet<Watcher>) t.hashSet[i][j].clone();
 
         t.g = g;
-        if (t.currentExam != null)
+        if (currentExam != null) {
             t.currentExam = (Exam) currentExam.clone();
+        }
         else
             t.currentExam = null;
+        watchesCount = Arrays.copyOf(watchesCount, watchesCount.length);
         return t;
     }
 
+    @Override
+    public String toString() {
+        return "Table{" +
+                "list=" + list +
+                '}';
+    }
+
+    public ArrayList<Exam> getList() {
+        return list;
+    }
+
+    public HashSet<Watcher>[][] getHashSet() {
+        return hashSet;
+    }
+
+    public HashSet<ClassRoom>[][] getClassRoomHashSet() {
+        return classRoomHashSet;
+    }
+
+    public LinkedList<Subject> getPendingSubjects() {
+        return pendingSubjects;
+    }
+
+    public LinkedList<Teacher> getPendingTeachers() {
+        return pendingTeachers;
+    }
+
+    public LinkedList<TeacherAssistant> getPendingTeachersAssistant() {
+        return pendingTeachersAssistant;
+    }
+
+    public LinkedList<Employee> getPendingEmployees() {
+        return pendingEmployees;
+    }
+
+    public LinkedList<MasterStudent> getPendingStudents() {
+        return pendingStudents;
+    }
+
+    public int[] getWatchesCount() {
+        return watchesCount;
+    }
+
+    public int getG() {
+        return g;
+    }
+
     //uniform search
-    public static void solve() {
+    public static Table solve() {
         PriorityQueue<PqPair<Table>> pq = new PriorityQueue<>();
         Table table = new Table();
         table.pendingSubjects.addAll(Main.subjects);
@@ -308,16 +363,16 @@ public class Table implements Cloneable {
 
         HashMap<Table, Integer> mp = new HashMap<>();
         mp.put(table, 0);
+
         while (!pq.isEmpty()) {
 
             PqPair<Table> p = pq.poll();
             Integer cost = p.first;
             Table t = p.second;
 
-
             if (t.isFinal()) {
                 //TODO printing Table content and constrains break
-                return;
+                return t;
             }
 
             if (mp.containsKey(t))
@@ -339,6 +394,7 @@ public class Table implements Cloneable {
                 }
             }
         }
+        return null;
     }
 
     public static void AStar() {
