@@ -23,6 +23,7 @@ public class Main {
         Main.teachers = (ArrayList<Teacher>) map.get("teachers");
         Main.students = (ArrayList<MasterStudent>) map.get("master");
 
+
         Table t = Table.AStar();
         System.out.println(t);
 

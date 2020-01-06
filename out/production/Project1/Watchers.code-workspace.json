@@ -41,7 +41,7 @@
         "type": "Teacher",
         "constrain": {
             "days": "10100",
-            "secDays": "11100",
+            "secDays": "01100",
             "conTime": 3,
             "cntTime": 3,
             "mainTime": "111",

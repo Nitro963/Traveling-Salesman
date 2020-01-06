@@ -128,7 +128,7 @@ public class Table implements Cloneable , Serializable{
                                 t.g = 2;
                             }
                             if (!teacher.getConstrain().isPreferDay(currentExam.getSubject().getDay())) {
-                                t.currentExam.addConstrainBreak(teacher.getName() + "dose not prefer day " + currentExam.getSubject().getDay());
+                                t.currentExam.addConstrainBreak(teacher.getName() + " dose not prefer day " + currentExam.getSubject().getDay());
                                 t.g += 2;
                             }
                             t.g += t.checkWatchesCount(teacher);
@@ -147,7 +147,7 @@ public class Table implements Cloneable , Serializable{
                     cnt++;
             if (cnt > 1) {
                 currentExam.addConstrainBreak("Employee " + w.getName() +
-                        " has more than 1 watch at day" + currentExam.getSubject().getDay());
+                        " has more than 1 watch at day " + currentExam.getSubject().getDay());
                 return 1;
             }
             return 0;
@@ -159,7 +159,7 @@ public class Table implements Cloneable , Serializable{
             if (cnt >= 2) {
                 if (w.getConstrain().getCntDay() < cnt) {
                     currentExam.addConstrainBreak("watcher " + w.getName() +
-                            " has more than 2 watch at day" + currentExam.getSubject().getDay());
+                            " has more than 2 watch at day " + currentExam.getSubject().getDay());
                     return 1;
                 }
             }
@@ -206,7 +206,7 @@ public class Table implements Cloneable , Serializable{
                                 t.g = 2;
                             }
                             if (!student.getConstrain().isPreferDay(currentExam.getSubject().getDay())) {
-                                t.currentExam.addConstrainBreak(student.getName() + "dose not prefer day " + currentExam.getSubject().getDay());
+                                t.currentExam.addConstrainBreak(student.getName() + " dose not prefer day " + currentExam.getSubject().getDay());
                                 t.g += 2;
                             }
                             t.g += t.checkWatchesCount(student);

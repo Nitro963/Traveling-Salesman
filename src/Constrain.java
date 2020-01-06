@@ -3,7 +3,7 @@ import java.util.Objects;
 
 public class Constrain implements Cloneable, Serializable {
     private String mainDaysMask;
-    private String secondaryDaysMask;
+    public String secondaryDaysMask;
     private String mainTimesMask;
     private String secondaryTimesMask;
     private int conDay;//main
@@ -39,7 +39,7 @@ public class Constrain implements Cloneable, Serializable {
     }
 
     public boolean isPreferDay(int i) {
-        return secondaryTimesMask.charAt(i - 1) == '1';
+        return secondaryDaysMask.charAt(i - 1) == '1';
     }
 
     public boolean isAvailableAtTime(int i) {
