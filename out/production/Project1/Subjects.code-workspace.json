@@ -1,56 +1,14 @@
 [
   {
     "name": "Math 1",
-    "studentCnt": 30,
+    "studentCnt": 100,
     "day": 1,
     "time": 1
   },
   {
     "name": "Math 2",
-    "studentCnt": 100,
-    "day": 1,
-    "time": 2
-  },
-  {
-    "name": "Math 3",
     "studentCnt": 50,
     "day": 1,
-    "time": 3
-  },
-  {
-    "name": "Programing 1",
-    "studentCnt": 150,
-    "day": 2,
-    "time": 1
-  },
-  {
-    "name": "Programing 2",
-    "studentCnt": 50,
-    "day": 2,
     "time": 2
-  },
-  {
-    "name": "Programing 3",
-    "studentCnt": 100,
-    "day": 2,
-    "time": 3
-  },
-  {
-    "name": "English 1",
-    "studentCnt": 200,
-    "day": 3,
-    "time": 1
-  },
-  {
-    "name": "English 2",
-    "studentCnt": 150,
-    "day": 3,
-    "time": 2
-  },
-  {
-    "name": "Programing 3",
-    "studentCnt": 350,
-    "day": 3,
-    "time": 3
   }
 ]

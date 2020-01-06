@@ -1,10 +1,10 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 
 
 public class Table implements Cloneable , Serializable{
+
     public static Object deepCopy(Object b){
         try {
             ByteArrayOutputStream byteOutStream = new ByteArrayOutputStream();
@@ -75,15 +75,13 @@ public class Table implements Cloneable , Serializable{
     }
 
     private boolean checkConDay(Watcher w) {
-        if (w.getConstrain().getConDay() == -1)
-            return true;
         int cnt = 0;
         for (int j = 1; j <= 3; j++)
             if (hashSet[currentExam.getSubject().getDay()][j].contains(w))
                 cnt++;
             else
                 cnt = 0;
-        return cnt <= w.getConstrain().getConDay();
+        return cnt > w.getConstrain().getConDay();
     }
 
     private ArrayList<Table> selectClassRoom(ArrayList<ClassRoom> classRooms) {
@@ -107,7 +105,7 @@ public class Table implements Cloneable , Serializable{
         ArrayList<Table> ret = new ArrayList<>();
         for (int i = 0; i < teachers.size(); i++) {
             Teacher teacher = teachers.get(i);
-            if (!this.checkConDay(teacher))
+            if (this.checkConDay(teacher))
                 continue;
             if (watchesCount[teacher.id] + 1 <= teacher.getCntMax())
                 if (!hashSet[currentExam.getSubject().getDay()][currentExam.getSubject().getTime()].contains(teacher.getId()))
@@ -191,7 +189,7 @@ public class Table implements Cloneable , Serializable{
         ArrayList<Table> ret = new ArrayList<>();
         for (int i = 0; i < pendingStudents.size(); i++) {
             MasterStudent student = pendingStudents.get(i);
-            if (!this.checkConDay(student))
+            if (this.checkConDay(student))
                 continue;
             if (watchesCount[student.getId()] + 1 <= student.getCntMax()) {
                 if (!hashSet[currentExam.getSubject().getDay()][currentExam.getSubject().getTime()].contains(student.getId())) {
@@ -357,13 +355,27 @@ public class Table implements Cloneable , Serializable{
         return g;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Table table = (Table) o;
+        return list.equals(table.list) &&
+                Objects.equals(currentExam, table.currentExam);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(list, currentExam);
+    }
+
     //uniform search
     public static Table solve() {
         PriorityQueue<PqPair<Table>> pq = new PriorityQueue<>();
         ArrayList<Subject> mySubjects = new ArrayList<>();
         mySubjects.add(Main.subjects.get(0));
+        //mySubjects.add(Main.subjects.get(1));
         Table table = new Table(mySubjects);
-//        table.pendingSubjects.add(Main.subjects.get(0));
         pq.add(new PqPair<>(0, table));
 
         HashMap<Table, Integer> mp = new HashMap<>();
@@ -375,14 +387,15 @@ public class Table implements Cloneable , Serializable{
             Integer cost = p.first;
             Table t = p.second;
 
+            if (mp.containsKey(t))
+                if (cost > mp.get(t))
+                    continue;
+
             if (t.isFinal()) {
                 //TODO printing Table content and constrains break
                 return t;
             }
 
-            if (mp.containsKey(t))
-                if (cost > mp.get(t))
-                    continue;
 
             ArrayList<Table> list = t.generateNext(Main.classRooms);
 
@@ -402,51 +415,57 @@ public class Table implements Cloneable , Serializable{
         return null;
     }
 
-    public static void AStar() {
-        PriorityQueue<PqPair<PqPair<Table>>> pq = new PriorityQueue<>();
-        Table table = new Table();
-        table.pendingSubjects.addAll(Main.subjects);
-        pq.add(new PqPair<>(0, new PqPair<>(0, table)));
+    public static Table AStar() {
+        PriorityQueue<PqPair<Table>> pq = new PriorityQueue<>();
+        ArrayList<Subject> mySubjects = new ArrayList<>();
+        mySubjects.add(Main.subjects.get(0));
+        mySubjects.add(Main.subjects.get(1));
+
+        Table table = new Table(mySubjects);
+        pq.add(new PqPair<>(0, table));
 
         HashMap<Table, Integer> mp = new HashMap<>();
         mp.put(table, 0);
         HashMap<Table, Integer> gmp = new HashMap<>();
-        mp.put(table, 0);
+        gmp.put(table, 0);
         while (!pq.isEmpty()) {
 
-            PqPair<PqPair<Table>> p = pq.poll();
-            Integer fCost = p.first;
-            Integer gCost = p.second.first;
-            Table t = p.second.second;
+            PqPair<Table> p = pq.poll();
+            Table t = p.second;
 
+            Integer currentF = mp.get(t);
+            Integer currentG = gmp.get(t);
+
+            if (mp.containsKey(t))
+                if (currentF < p.first)
+                    continue;
 
             if (t.isFinal()) {
                 //TODO printing Table content and constrains break
-                return;
+                return t;
             }
-
-            if (mp.containsKey(t))
-                if (fCost > mp.get(t))
-                    continue;
 
             ArrayList<Table> list = t.generateNext(Main.classRooms);
 
             for (Table child : list) {
                 if (mp.containsKey(child)) {
                     int oldCost = mp.get(child);
-                    int newCost = fCost + child.g + child.h1();
-                    if (oldCost > newCost) {
-                        mp.put(child, newCost);
-                        mp.put(child, child.g + gCost);
-                        pq.add(new PqPair<>(newCost, new PqPair<>(gCost + child.g, child)));
+                    int g = child.g + currentG;
+                    int f = g + child.h1();
+                    if (oldCost > f) {
+                        mp.put(child, f);
+                        gmp.put(child, g);
+                        pq.add(new PqPair<>(f, child));
                     }
                 } else {
-                    int f = fCost + child.g + child.h1();
+                    int g = currentG + child.g;
+                    int f = g + child.h1();
                     mp.put(child, f);
-                    mp.put(child, gCost + child.g);
-                    pq.add(new PqPair<>(f, new PqPair<>(gCost + child.g, child)));
+                    gmp.put(child, g);
+                    pq.add(new PqPair<>(f, child));
                 }
             }
         }
+        return null;
     }
 }

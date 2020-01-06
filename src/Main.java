@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 
 
 public class Main {
@@ -13,7 +14,6 @@ public class Main {
     public static ArrayList<Subject> subjects = new ArrayList<>();
 
     public static void main(String[] args) throws FileNotFoundException {
-        //TSP_State.solve();
         read r = new read();
         HashMap<String, Object> map = r.ReadJson();
         Main.classRooms = (ArrayList<ClassRoom>) map.get("rooms");
@@ -23,9 +23,8 @@ public class Main {
         Main.teachers = (ArrayList<Teacher>) map.get("teachers");
         Main.students = (ArrayList<MasterStudent>) map.get("master");
 
-        Table t = Table.solve();
+        Table t = Table.AStar();
         System.out.println(t);
-
 
     }
 }
