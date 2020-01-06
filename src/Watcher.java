@@ -54,7 +54,8 @@ abstract public class Watcher implements Cloneable {
             Watcher w = (Watcher) super.clone();
             w.name = this.name;
             w.cntMax = cntMax;
-            w.constrain = (Constrain) this.constrain.clone();
+            if (constrain != null)
+                w.constrain = (Constrain) this.constrain.clone();
             w.type = type;
             w.id = id;
             return w;

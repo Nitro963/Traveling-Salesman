@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -105,9 +104,11 @@ public class Exam implements Comparable<Exam>, Cloneable {
         Exam exam = new Exam();
         exam.classRoom = (ClassRoom) classRoom.clone();
         exam.subject = (Subject) subject.clone();
-        Collections.copy(exam.constrainBreak, constrainBreak);
-        exam.head = (Teacher) head.clone();
-        exam.secretary = (Employee) secretary.clone();
+        exam.constrainBreak = (ArrayList<String>) constrainBreak.clone();
+        if (head != null)
+            exam.head = (Teacher) head.clone();
+        if (secretary != null)
+            exam.secretary = (Employee) secretary.clone();
         exam.watchers = (HashSet<Watcher>) watchers.clone();
         exam.watchersTypes = (LinkedList<String>) watchersTypes.clone();
         return exam;

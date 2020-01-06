@@ -82,10 +82,8 @@ public class Table implements Cloneable {
         ArrayList<Table> ret = new ArrayList<>();
         for (int i = 0; i < teachers.size(); i++) {
             Teacher teacher = teachers.get(i);
-            if (!this.checkConDay(teacher)) {
-                System.out.println("con day");
+            if (!this.checkConDay(teacher))
                 continue;
-            }
             if (watchesCount[teacher.id] + 1 <= teacher.getCntMax())
                 if (!hashSet[currentExam.getSubject().getDay()][currentExam.getSubject().getTime()].contains(teacher))
                     if (teacher.getConstrain().isAvailableAtDay(currentExam.getSubject().getDay())) {
@@ -124,7 +122,7 @@ public class Table implements Cloneable {
             for (int j = 1; j <= 3; j++)
                 if (hashSet[currentExam.getSubject().getDay()][j].contains(w))
                     cnt++;
-            if (cnt >= 1) {
+            if (cnt > 1) {
                 currentExam.addConstrainBreak("Employee " + w.getName() +
                         " has more than 1 watch at day" + currentExam.getSubject().getDay());
                 return 1;
@@ -205,7 +203,6 @@ public class Table implements Cloneable {
         if (currentExam.getWatcherNeed() <= currentExam.getWatchers().size()) {
             return ret;
         }
-        System.out.println(currentExam.getNextWatcher());
         switch (currentExam.getNextWatcher()) {
             case "Teacher": {
                 if (pendingTeachers.isEmpty())
@@ -246,13 +243,9 @@ public class Table implements Cloneable {
     }
 
     private ArrayList<Table> generateNext(ArrayList<ClassRoom> classRooms) {
-        if (currentExam == null) {
-            ArrayList<Table> tables = selectClassRoom(classRooms);
-            return tables;
-        }
-        ArrayList<Table> tables = selectWatcher();
-        System.out.println(tables.size());
-        return tables;
+        if (currentExam == null)
+            return selectClassRoom(classRooms);
+        return selectWatcher();
     }
 
     public boolean isFinal() {
@@ -305,8 +298,7 @@ public class Table implements Cloneable {
                 t.hashSet[i][j] = (HashSet<Watcher>) t.hashSet[i][j].clone();
 
         t.g = g;
-        if (t.currentExam != null) {
-            System.out.println("cloned");
+        if (currentExam != null) {
             t.currentExam = (Exam) currentExam.clone();
         }
         else
