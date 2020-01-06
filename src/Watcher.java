@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Objects;
 
-abstract public class Watcher implements Cloneable {
+abstract public class Watcher implements Cloneable, Serializable {
     protected String name;
     protected Constrain constrain;
     protected int cntMax;
@@ -73,7 +74,6 @@ abstract public class Watcher implements Cloneable {
     public String toString() {
         return "Watcher{" +
                 "name='" + name + '\'' +
-                ", constrain=" + constrain +
                 ", type='" + type + '\'' +
                 '}';
     }

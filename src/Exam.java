@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 
 
-public class Exam implements Comparable<Exam>, Cloneable {
+public class Exam implements Comparable<Exam>, Cloneable, Serializable {
     private Subject subject;
     private ClassRoom classRoom;
     private Teacher head;

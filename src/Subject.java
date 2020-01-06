@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Subject implements Comparable<Subject>, Cloneable {
+public class Subject implements Comparable<Subject>, Cloneable, Serializable {
     private String name;
     private int studentsCnt;
     private int day, time;

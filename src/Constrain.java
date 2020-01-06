@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Constrain implements Cloneable {
+public class Constrain implements Cloneable, Serializable {
     private String mainDaysMask;
     private String secondaryDaysMask;
     private String mainTimesMask;

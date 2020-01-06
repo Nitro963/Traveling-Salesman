@@ -1,6 +1,6 @@
 [
     {
-        "name": "Mohamad Nsearaty",
+        "name": "W1",
         "type": "master",
         "constrain": {
             "days": "11100",
@@ -12,7 +12,32 @@
         }
     },
     {
-        "name": "Adnan Kattan",
+        "name": "W2",
+        "type": "master",
+        "constrain": {
+            "days": "11100",
+            "secDays": "11100",
+            "conTime": 2,
+            "cntTime": 1,
+            "mainTime": "111",
+            "secTime": "111"
+        }
+    },
+    {
+        "name": "W3",
+        "type": "master",
+        "constrain": {
+            "days": "10100",
+            "secDays": "00100",
+            "conTime": 2,
+            "cntTime": 3,
+            "mainTime": "111",
+            "secTime": "111"
+        }
+    },
+
+    {
+        "name": "Dr1",
         "type": "Teacher",
         "constrain": {
             "days": "10100",
@@ -24,67 +49,7 @@
         }
     },
     {
-        "name": "Zaher SaadEldin",
-        "type": "master",
-        "constrain": {
-            "days": "11100",
-            "secDays": "11100",
-            "conTime": 2,
-            "cntTime": 1,
-            "mainTime": "111",
-            "secTime": "111"
-        }
-    },
-    {
-        "name": "Osama Al-halabi",
-        "type": "master",
-        "constrain": {
-            "days": "10100",
-            "secDays": "00100",
-            "conTime": 2,
-            "cntTime": 3,
-            "mainTime": "111",
-            "secTime": "111"
-        }
-    },
-    {
-        "name": "Muhannad Al-tabba",
-        "type": "master",
-        "constrain": {
-            "days": "11100",
-            "secDays": "11100",
-            "conTime": 2,
-            "cntTime": 2,
-            "mainTime": "111",
-            "secTime": "111"
-        }
-    },
-    {
-        "name": "Baraa Zain",
-        "type": "master",
-        "constrain": {
-            "days": "00100",
-            "secDays": "00100",
-            "conTime": 1,
-            "cntTime": 1,
-            "mainTime": "111",
-            "secTime": "111"
-        }
-    },
-    {
-        "name": "Alaa alaji",
-        "type": "master",
-        "constrain": {
-            "days": "11000",
-            "secDays": "10000",
-            "conTime": 1,
-            "cntTime": 2,
-            "mainTime": "111",
-            "secTime": "111"
-        }
-    },
-    {
-        "name": "Pr.Midhat Al-sous",
+        "name": "Dr2",
         "type": "Teacher",
         "constrain": {
             "days": "11100",
@@ -95,78 +60,7 @@
             "secTime": "111"
         }
     },
-    {
-        "name": "Pr.Mohammad Al-Ahmad",
-        "type": "Teacher",
-        "constrain": {
-            "days": "10100",
-            "secDays": "10100",
-            "conTime": 2,
-            "cntTime": 2,
-            "mainTime": "111",
-            "secTime": "111"
-        }
-    },
-    {
-        "name": "Pr.Miad Jaber",
-        "type": "Teacher",
-        "constrain": {
-            "days": "11000",
-            "secDays": "11000",
-            "conTime": 1,
-            "cntTime": 2,
-            "mainTime": "111",
-            "secTime": "111"
-        }
-    },
-    {
-        "name": "Pr.Zouher Sandouk ",
-        "type": "Teacher",
-        "constrain": {
-            "days": "00100",
-            "secDays": "00100",
-            "conTime": 1,
-            "cntTime": 1,
-            "mainTime": "111",
-            "secTime": "111"
-        }
-    },
-    {
-        "name": "Eng.Zaina dalal",
-        "type": "TeacherAssist",
-        "constrain": {
-            "days": "10100",
-            "secDays": "00100",
-            "conTime": 3,
-            "cntTime": 3,
-            "mainTime": "111",
-            "secTime": "111"
-        }
-    },
-    {
-        "name": "Eng.Mohamad Sheikha",
-        "type": "TeacherAssist",
-        "constrain": {
-            "days": "11100",
-            "secDays": "11100",
-            "conTime": 1,
-            "cntTime": 1,
-            "mainTime": "111",
-            "secTime": "111"
-        }
-    },
-    {
-        "name": "Eng.Rubba Al-Sabbagh",
-        "type": "TeacherAssist",
-        "constrain": {
-            "days": "01100",
-            "secDays": "01000",
-            "conTime": 2,
-            "cntTime": 2,
-            "mainTime": "111",
-            "secTime": "111"
-        }
-    },
+
     {
         "name": "E1",
         "type": "Employee"
@@ -177,22 +71,6 @@
     },
     {
         "name": "E3",
-        "type": "Employee"
-    },
-    {
-        "name": "E4",
-        "type": "Employee"
-    },
-    {
-        "name": "E5",
-        "type": "Employee"
-    },
-    {
-        "name": "E6",
-        "type": "Employee"
-    },
-    {
-        "name": "E7",
         "type": "Employee"
     }
 ]

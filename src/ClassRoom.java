@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ClassRoom implements Comparable<ClassRoom>, Cloneable {
+public class ClassRoom implements Comparable<ClassRoom>, Cloneable, Serializable {
     private String name;
     private int floor;
     private int cap;
