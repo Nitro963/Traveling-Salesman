@@ -6,7 +6,9 @@
             "days": "11100",
             "secDays": "11100",
             "conTime": 3,
-            "cntTime": 2
+            "cntTime": 2,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -16,7 +18,9 @@
             "days": "10100",
             "secDays": "11100",
             "conTime": 3,
-            "cntTime": 3
+            "cntTime": 3,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -26,7 +30,9 @@
             "days": "11100",
             "secDays": "11100",
             "conTime": 2,
-            "cntTime": 1
+            "cntTime": 1,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -36,7 +42,9 @@
             "days": "10100",
             "secDays": "00100",
             "conTime": 2,
-            "cntTime": 3
+            "cntTime": 3,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -46,7 +54,9 @@
             "days": "11100",
             "secDays": "11100",
             "conTime": 2,
-            "cntTime": 2
+            "cntTime": 2,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -56,7 +66,9 @@
             "days": "00100",
             "secDays": "00100",
             "conTime": 1,
-            "cntTime": 1
+            "cntTime": 1,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -66,7 +78,9 @@
             "days": "11000",
             "secDays": "10000",
             "conTime": 1,
-            "cntTime": 2
+            "cntTime": 2,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -76,7 +90,9 @@
             "days": "11100",
             "secDays": "11000",
             "conTime": 3,
-            "cntTime": 3
+            "cntTime": 3,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -86,7 +102,9 @@
             "days": "10100",
             "secDays": "10100",
             "conTime": 2,
-            "cntTime": 2
+            "cntTime": 2,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -96,7 +114,9 @@
             "days": "11000",
             "secDays": "11000",
             "conTime": 1,
-            "cntTime": 2
+            "cntTime": 2,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -106,7 +126,9 @@
             "days": "00100",
             "secDays": "00100",
             "conTime": 1,
-            "cntTime": 1
+            "cntTime": 1,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -116,7 +138,9 @@
             "days": "10100",
             "secDays": "00100",
             "conTime": 3,
-            "cntTime": 3
+            "cntTime": 3,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -126,7 +150,9 @@
             "days": "11100",
             "secDays": "11100",
             "conTime": 1,
-            "cntTime": 1
+            "cntTime": 1,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {
@@ -136,7 +162,9 @@
             "days": "01100",
             "secDays": "01000",
             "conTime": 2,
-            "cntTime": 2
+            "cntTime": 2,
+            "mainTime": "111",
+            "secTime": "111"
         }
     },
     {

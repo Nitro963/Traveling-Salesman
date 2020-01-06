@@ -58,7 +58,9 @@ public class read {
                         Object object = jsonObject.get("constrain");
                         MasterStudent masterStudent = new MasterStudent((String) jsonObject.get("name"), id,
                                 new Constrain(
-                                        (String) ((JSONObject) object).get("days"), (String) ((JSONObject) object).get("secDays"), (long) ((JSONObject) object).get("conTime"), (long) ((JSONObject) object).get("cntTime")
+                                        (String) ((JSONObject) object).get("days"), (String) ((JSONObject) object).get("secDays"),
+                                        (String) ((JSONObject) object).get("mainTime"), (String) ((JSONObject) object).get("secTime"),
+                                        (long) ((JSONObject) object).get("conTime"), (long) ((JSONObject) object).get("cntTime")
                                 ));
                         masterStudents.add(masterStudent);
                         break;
@@ -67,7 +69,9 @@ public class read {
                         Object object = jsonObject.get("constrain");
                         Teacher teacher = new Teacher((String) jsonObject.get("name"), id,
                                 new Constrain(
-                                        (String) ((JSONObject) object).get("days"), (String) ((JSONObject) object).get("secDays"), (long) ((JSONObject) object).get("conTime"), (long) ((JSONObject) object).get("cntTime")
+                                        (String) ((JSONObject) object).get("days"), (String) ((JSONObject) object).get("secDays"),
+                                        (String) ((JSONObject) object).get("mainTime"), (String) ((JSONObject) object).get("secTime"),
+                                        (long) ((JSONObject) object).get("conTime"), (long) ((JSONObject) object).get("cntTime")
                                 )
                         );
                         teachers.add(teacher);
@@ -77,7 +81,9 @@ public class read {
                         Object object = jsonObject.get("constrain");
                         TeacherAssistant teacherAssistant = new TeacherAssistant((String) jsonObject.get("name"), id,
                                 new Constrain(
-                                        (String) ((JSONObject) object).get("days"), (String) ((JSONObject) object).get("secDays"), (long) ((JSONObject) object).get("conTime"), (long) ((JSONObject) object).get("cntTime")
+                                        (String) ((JSONObject) object).get("days"), (String) ((JSONObject) object).get("secDays"),
+                                        (String) ((JSONObject) object).get("mainTime"), (String) ((JSONObject) object).get("secTime"),
+                                        (long) ((JSONObject) object).get("conTime"), (long) ((JSONObject) object).get("cntTime")
                                 )
                         );
                         teacherAssistants.add(teacherAssistant);
