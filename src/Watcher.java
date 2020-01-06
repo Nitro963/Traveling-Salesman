@@ -68,4 +68,12 @@ abstract public class Watcher implements Cloneable {
         return type;
     }
 
+    @Override
+    public String toString() {
+        return "Watcher{" +
+                "name='" + name + '\'' +
+                ", constrain=" + constrain +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

@@ -3,18 +3,18 @@
         "name": "Mohamad Nsearaty",
         "type": "master",
         "constrain": {
-            "days": "11000",
-            "secDays": "10000",
-            "conTime": 2,
+            "days": "11100",
+            "secDays": "11100",
+            "conTime": 3,
             "cntTime": 2
         }
     },
     {
         "name": "Adnan Kattan",
-        "type": "master",
+        "type": "Teacher",
         "constrain": {
             "days": "10100",
-            "secDays": "00100",
+            "secDays": "11100",
             "conTime": 3,
             "cntTime": 3
         }

@@ -16,8 +16,9 @@ public class Exam implements Comparable<Exam>, Cloneable {
     private Exam() {
     }
 
-    public Exam(ClassRoom classRoom) {
+    public Exam(ClassRoom classRoom, Subject subject) {
         this.classRoom = classRoom;
+        this.subject = subject;
         watchers = new HashSet<>();
         constrainBreak = new ArrayList<>();
         watchersTypes = new LinkedList<>();
@@ -45,13 +46,7 @@ public class Exam implements Comparable<Exam>, Cloneable {
                 break;
             }
         }
-    }
 
-    public Exam(ClassRoom classRoom, Subject subject) {
-        this.classRoom = classRoom;
-        this.subject = subject;
-        watchers = new HashSet<>();
-        constrainBreak = new ArrayList<>();
     }
 
     public int getWatcherNeed() {
@@ -114,7 +109,18 @@ public class Exam implements Comparable<Exam>, Cloneable {
         exam.head = (Teacher) head.clone();
         exam.secretary = (Employee) secretary.clone();
         exam.watchers = (HashSet<Watcher>) watchers.clone();
+        exam.watchersTypes = (LinkedList<String>) watchersTypes.clone();
         return exam;
+    }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "subject=" + subject +
+                ", classRoom=" + classRoom +
+                ", watchers=" + watchers +
+                ", constrainBreak=" + constrainBreak +
+                '}';
     }
 
     public boolean isValid() {

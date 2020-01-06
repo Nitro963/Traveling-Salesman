@@ -5,6 +5,16 @@ public class Subject implements Comparable<Subject>, Cloneable {
     private int studentsCnt;
     private int day, time;
 
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "name='" + name + '\'' +
+                ", studentsCnt=" + studentsCnt +
+                ", day=" + day +
+                ", time=" + time +
+                '}';
+    }
+
     public Subject(String name, long studentsCnt, long day, long time) {
         this.name = name;
         this.studentsCnt = (int) studentsCnt;

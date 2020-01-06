@@ -308,53 +308,51 @@
 	}
 },
 {
-	"name": "Pr.Fatima Alkoder",
+	"name": "Pr.Fatima Alkhoder",
 	"type": "Teacher",
-	"constrain":
-	{
-		"days":"11100",
-		"secDays":"11100",
-		"conTime":3,
-		"cntTime":1
+	"constrain": {
+		"days": "11100",
+		"secDays": "11100",
+		"conTime": 3,
+		"cntTime": 1
 	}
 },
-{
-	"name": "PR.Iyad Keyat",
-	"type": "Teacher",
-	"constrain":
 	{
-		"days":"11100",
-		"secDays":"11100",
-		"conTime":2,
-		"cntTime":2
-	}
-},
+		"name": "PR.Eyad Khayat",
+		"type": "Teacher",
+		"constrain": {
+			"days": "11100",
+			"secDays": "11100",
+			"conTime": 2,
+			"cntTime": 2
+		}
+	},
 {
 	"name": "E1",
-	"type": "Employee",
+	"type": "Employee"
 },
 {
 	"name": "E2",
-	"type": "Employee",
+	"type": "Employee"
 },
 {
 	"name": "E3",
-	"type": "Employee",
+	"type": "Employee"
 },
 {
 	"name": "E4",
-	"type": "Employee",
+	"type": "Employee"
 },
 {
 	"name": "E5",
-	"type": "Employee",
+	"type": "Employee"
 },
 {
 	"name": "E6",
-	"type": "Employee",
+	"type": "Employee"
 },
 {
 	"name": "E7",
-	"type": "Employee",
+	"type": "Employee"
 }
 ]
