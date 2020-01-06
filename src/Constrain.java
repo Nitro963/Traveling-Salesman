@@ -17,13 +17,13 @@ public class Constrain implements Cloneable {
         cntDay = 3;
     }
 
-    private Constrain(String mainDaysMask, String secondaryDaysMask, String mainTimesMask, String secondaryTimesMask, int conDay, int cntDay) {
+    public Constrain(String mainDaysMask, String secondaryDaysMask, String mainTimesMask, String secondaryTimesMask, long conDay, long cntDay) {
         this.mainDaysMask = mainDaysMask;
         this.secondaryDaysMask = secondaryDaysMask;
         this.mainTimesMask = mainTimesMask;
         this.secondaryTimesMask = secondaryTimesMask;
-        this.conDay = conDay;
-        this.cntDay = cntDay;
+        this.conDay = (int) conDay;
+        this.cntDay = (int) cntDay;
     }
 
     public Constrain(String mainDaysMask, String secondaryDaysMask, long conDay, long cntDay) {
