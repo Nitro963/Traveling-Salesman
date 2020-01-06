@@ -253,20 +253,20 @@ public class Table implements Cloneable {
             if (currentExam != null) {
                 if (currentExam.isValid()) {
                     list.add(currentExam);
-                /*
-                //possible bug be careful
-                for (Watcher w: currentExam.getWatchers()) {
-                    if(w instanceof TeacherAssistant)
-                        pendingTeachersAssistant.remove(w);
-                    else
-                        if(w instanceof Teacher)
-                            pendingTeachers.remove(w);
-                    if(w instanceof MasterStudent)
-                        pendingStudents.remove(w);
-                    if(w instanceof Employee)
-                        pendingEmployees.remove(w);
-                }
-                 */
+                    /*
+                    //possible bug be careful
+                    for (Watcher w: currentExam.getWatchers()) {
+                        if(w instanceof TeacherAssistant)
+                            pendingTeachersAssistant.remove(w);
+                        else
+                            if(w instanceof Teacher)
+                                pendingTeachers.remove(w);
+                        if(w instanceof MasterStudent)
+                            pendingStudents.remove(w);
+                        if(w instanceof Employee)
+                            pendingEmployees.remove(w);
+                    }
+                     */
                     Subject s = pendingSubjects.peek();
                     s.setStudentsCnt(Math.min(s.getStudentsCnt() - currentExam.getClassRoom().getCap(), 0));
                     if (s.getStudentsCnt() == 0)
@@ -358,7 +358,7 @@ public class Table implements Cloneable {
     public static Table solve() {
         PriorityQueue<PqPair<Table>> pq = new PriorityQueue<>();
         Table table = new Table();
-        table.pendingSubjects.add(Main.subjects.get(0));
+        table.pendingSubjects.addAll(Main.subjects);
         pq.add(new PqPair<>(0, table));
 
         HashMap<Table, Integer> mp = new HashMap<>();

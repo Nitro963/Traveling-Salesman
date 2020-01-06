@@ -16,20 +16,20 @@ public class Main {
         //TSP_State.solve();
         read r = new read();
         HashMap<String, Object> map = r.ReadJson();
-/*        Main.ClassRooms = (ArrayList<ClassRoom>) map.get("rooms");
+        Main.ClassRooms = (ArrayList<ClassRoom>) map.get("rooms");
         Main.subjects = (ArrayList<Subject>) map.get("subjects");
         Main.employees = (ArrayList<Employee>) map.get("employees");
         Main.teacherAssistants = (ArrayList<TeacherAssistant>) map.get("teacherAssistants");
         Main.teachers = (ArrayList<Teacher>) map.get("teachers");
         Main.students = (ArrayList<MasterStudent>) map.get("master");
-*/
 
+/*
         employees.add(((ArrayList<Employee>) map.get("employees")).get(0));
         subjects.add(((ArrayList<Subject>) map.get("subjects")).get(0));
         teachers.add(((ArrayList<Teacher>) map.get("teachers")).get(0));
         students.add(((ArrayList<MasterStudent>) map.get("master")).get(0));
         ClassRooms.add(((ArrayList<ClassRoom>) map.get("rooms")).get(0));
-
+*/
         Table t = Table.solve();
         System.out.println(t);
 
